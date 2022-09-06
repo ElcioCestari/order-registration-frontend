@@ -1,0 +1,22 @@
+body {
+  background-color: #303030;
+}
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+}
+.section {
+  color: coral;
+}
+.header {
+  color: aqua;
+}
+.nav {
+  color: chartreuse;
+}
+
+mat-typography {
+  background-color: #ff0000;
+}
