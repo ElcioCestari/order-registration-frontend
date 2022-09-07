@@ -1,4 +1,16 @@
 .header {
+  display: flex;
+  align-items: end;
   background-color: #ce93d8;
   padding: 5%;
+}
+
+.header a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.header a i {
+  padding-right: 2px;
 }
