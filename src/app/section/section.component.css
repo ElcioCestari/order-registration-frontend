@@ -1,6 +1,3 @@
 .section {
   background-color: var(--background);
-  display: flex;
-  align-items: center;
-  /*flex-flow: row wrap;*/
 }

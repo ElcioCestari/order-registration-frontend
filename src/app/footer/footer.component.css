@@ -1,5 +1,5 @@
 .footer {
-  background-color: var(--primary-500);
+  background-color: var(--background-secondary);
   position: fixed;
   bottom: 0;
   display: flex;
