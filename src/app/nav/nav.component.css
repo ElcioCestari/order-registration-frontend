@@ -1,3 +1,6 @@
-.nav {
-  background-color: chartreuse;
+.container {
+}
+
+.sidenav {
+  background-color: var(--primary-500);
 }

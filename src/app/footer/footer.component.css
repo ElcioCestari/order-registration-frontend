@@ -1,5 +1,7 @@
 .footer {
-  background-color: red;
+  background-color: var(--primary-500);
   position: fixed;
   bottom: 0;
+  display: flex;
+  justify-content: end;
 }

@@ -3,8 +3,17 @@
 html,
 body {
   height: 100%;
+  background-color: var(--background);
 }
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+:root {
+  --primary-500: #673ab7;
+  --primary-700: #512da8;
+  --primary-800: #4527a0;
+  --accent: #e040fb;
+  --primary-text: #ffffff;
+  --background: #303030;
 }
