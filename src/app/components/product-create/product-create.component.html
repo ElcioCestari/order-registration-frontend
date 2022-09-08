@@ -21,7 +21,9 @@
       <mat-label>Preço de venda</mat-label>
       <input matInput #unitPurchaseSale placeholder="Preço de venda R$" />
     </mat-form-field>
-    <button class="mat-button">cancelar</button>
-    <button class="mat-button">salvar</button>
+    <mat-card-actions>
+      <button class="mat-button" (click)="cancel()">cancelar</button>
+      <button class="mat-button" (click)="save()">salvar</button>
+    </mat-card-actions>
   </mat-card-content>
 </mat-card>

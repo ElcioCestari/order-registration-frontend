@@ -5,3 +5,12 @@ mat-card-content {
   display: flex;
   flex-direction: column;
 }
+mat-card-actions {
+  display: flex;
+  justify-content: end;
+}
+
+.mat-button {
+  background-color: var(--accent-primary);
+  border-radius: 5px;
+}

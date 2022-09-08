@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../model/product';
 import { Category } from '../../model/category';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-create',
@@ -19,7 +20,15 @@ export class ProductCreateComponent implements OnInit {
     haveInStock: false
   };
 
-  constructor() {}
+  constructor(private readonly router: Router) {}
 
   ngOnInit(): void {}
+
+  cancel(): void {
+    this.router.navigate(['/products/list']);
+  }
+
+  save(): void {
+    this.router.navigate(['/products/list']);
+  }
 }

@@ -13,7 +13,8 @@ body {
   --primary-500: #673ab7;
   --primary-700: #512da8;
   --primary-800: #4527a0;
-  --accent: #e040fb;
+  --accent-primary: #e040fb;
+  --accent-secondary: #03dac5;
   --primary-text: #ffffff;
   --background: #303030;
   --background-secondary: #424242;

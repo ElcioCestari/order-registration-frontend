@@ -16,6 +16,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { ProductListComponent } from './components/product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MatListModule } from '@angular/material/list';
     NavComponent,
     SectionComponent,
     FooterComponent,
-    ProductCreateComponent
+    ProductCreateComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,
