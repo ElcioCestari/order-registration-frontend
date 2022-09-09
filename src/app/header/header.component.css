@@ -14,3 +14,7 @@
 .header a i {
   padding-right: 2px;
 }
+
+.toolbar-separator {
+  flex: 1 1 auto;
+}
