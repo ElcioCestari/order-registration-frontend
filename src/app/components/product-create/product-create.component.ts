@@ -3,6 +3,7 @@ import { Product } from '../../model/product';
 import { Category } from '../../model/category';
 import { Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
+import { SnackbarService } from '../services/snackbar.service';
 
 @Component({
   selector: 'app-product-create',
@@ -23,17 +24,24 @@ export class ProductCreateComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private readonly service: ProductService
+    private readonly service: ProductService,
+    private readonly snackBar: SnackbarService
   ) {}
 
   ngOnInit(): void {}
 
   cancel(): void {
+    this.snackBar.show(`Operação cancelada`);
     this.router.navigate(['/products/list']);
   }
 
   save(): void {
-    this.service.save(this.product).subscribe();
-    this.router.navigate(['/products/list']);
+    this.service.save(this.product).subscribe({
+      next: () => {
+        this.snackBar.show(`Produto salvo!`);
+        this.router.navigate(['/products/list']);
+      },
+      error: () => this.snackBar.show(`Algo deu errado!`)
+    });
   }
 }

@@ -18,7 +18,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import {FormsModule} from "@angular/forms";
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    FormsModule
+    MatSnackBarModule,
+    FormsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

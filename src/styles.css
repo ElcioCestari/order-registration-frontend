@@ -19,3 +19,8 @@ body {
   --background: #303030;
   --background-secondary: #424242;
 }
+
+.snackBar {
+  background-color: var(--primary-700);
+  color: var(--primary-text);
+}
