@@ -1,0 +1,21 @@
+<mat-card class="mat-elevation-z7 center">
+  <mat-card-title>login</mat-card-title>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput [(ngModel)]="user.username" placeholder="Username" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        [(ngModel)]="user.password"
+        placeholder="Digite a descrição do produto"
+      />
+    </mat-form-field>
+    <mat-card-actions>
+      <button mat-raised-button>cancelar</button>
+      <button mat-raised-button color="primary">OK</button>
+    </mat-card-actions>
+  </mat-card-content>
+</mat-card>

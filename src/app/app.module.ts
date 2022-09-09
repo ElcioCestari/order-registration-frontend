@@ -22,6 +22,9 @@ import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { UserCreateComponent } from './user/components/user-create/user-create.component';
+import { UserLoginComponent } from './user/components/user-login/user-login.component';
+import { UserListComponent } from './user/components/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { MatIconModule } from '@angular/material/icon';
     SectionComponent,
     FooterComponent,
     ProductCreateComponent,
-    ProductListComponent
+    ProductListComponent,
+    UserCreateComponent,
+    UserLoginComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
