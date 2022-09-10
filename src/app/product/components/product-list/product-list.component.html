@@ -1,5 +1,10 @@
 <mat-card>
   <mat-card-title>Lista de Produtos</mat-card-title>
+  <mat-card-content>
+    <ul>
+      <li *ngFor="let product of list">{{product}}</li>
+    </ul>
+  </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="primary" (click)="newProduct()">
       novo

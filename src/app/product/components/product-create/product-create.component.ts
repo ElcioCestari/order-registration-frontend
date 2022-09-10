@@ -3,7 +3,7 @@ import { Product } from '../../../core/model/product';
 import { Category } from '../../../core/model/category';
 import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
-import { SnackbarService } from '../../services/snackbar.service';
+import { SnackbarService } from '../../../core/services/snackbar.service';
 
 @Component({
   selector: 'app-product-create',
