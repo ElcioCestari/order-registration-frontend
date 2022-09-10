@@ -26,4 +26,11 @@ export class ProductListComponent implements OnInit {
   load(): void {
     this.service.read().subscribe(list => (this.list = list));
   }
+
+  edit() {
+  }
+
+  delete() {
+
+  }
 }

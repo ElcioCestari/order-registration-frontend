@@ -1,13 +1,31 @@
-<mat-card>
-  <mat-card-title>Lista de Produtos</mat-card-title>
-  <mat-card-content>
-    <ul>
-      <li *ngFor="let product of list">{{product}}</li>
-    </ul>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="newProduct()">
-      novo
-    </button>
-  </mat-card-actions>
-</mat-card>
+<div class="container">
+  <h2>Produtos</h2>
+  <ul>
+    <li *ngFor="let product of list">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ product.name }}</mat-card-title>
+          <mat-card-subtitle>{{ product.category }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ product.description }}</p>
+          <p>
+            compra: {{ product.unitPurchasePrice | currency: 'BRL' }}
+            venda: {{ product.unitPurchaseSale | currency: 'BRL' }}
+          </p>
+          <p>Item no estoque {{product.haveInStock}}</p>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+          <button mat-raised-button (click)="edit()">editar</button>
+          <button mat-raised-button color="warn" (click)="delete()">
+            deletar
+          </button>
+        </mat-card-actions>
+        <mat-card-footer>registro: {{product.registrationTime}}</mat-card-footer>
+      </mat-card>
+    </li>
+  </ul>
+
+  <button mat-raised-button color="primary" (click)="newProduct()">novo</button>
+</div>

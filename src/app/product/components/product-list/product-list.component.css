@@ -1,3 +1,19 @@
+.container {
+  margin: 10px;
+}
 mat-card {
   margin: 10px;
+}
+mat-card-footer {
+  margin: 0 1px;
+  padding-bottom: 0;
+}
+mat-card mat-card-actions {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 0;
+}
+
+ul li {
+  text-decoration: none;
 }
