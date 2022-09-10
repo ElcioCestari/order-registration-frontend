@@ -27,10 +27,9 @@ export class ProductListComponent implements OnInit {
     this.service.read().subscribe(list => (this.list = list));
   }
 
-  edit() {
+  edit(product: Product): void {
+    this.router.navigate([`/products/update/${product.id}`]);
   }
 
-  delete() {
-
-  }
+  delete() {}
 }

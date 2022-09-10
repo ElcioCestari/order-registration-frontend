@@ -25,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { UserCreateComponent } from './user/components/user-create/user-create.component';
 import { UserLoginComponent } from './user/components/user-login/user-login.component';
 import { UserListComponent } from './user/components/user-list/user-list.component';
+import { ProductUpdateComponent } from './product/components/product-update/product-update.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { UserListComponent } from './user/components/user-list/user-list.compone
     ProductListComponent,
     UserCreateComponent,
     UserLoginComponent,
-    UserListComponent
+    UserListComponent,
+    ProductUpdateComponent
   ],
   imports: [
     BrowserModule,

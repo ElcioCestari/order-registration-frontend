@@ -10,22 +10,26 @@
         <mat-card-content>
           <p>{{ product.description }}</p>
           <p>
-            compra: {{ product.unitPurchasePrice | currency: 'BRL' }}
-            venda: {{ product.unitPurchaseSale | currency: 'BRL' }}
+            compra: {{ product.unitPurchasePrice | currency: 'BRL' }} venda:
+            {{ product.unitPurchaseSale | currency: 'BRL' }}
           </p>
-          <p>Item no estoque {{product.haveInStock}}</p>
+          <p>Item no estoque {{ product.haveInStock }}</p>
         </mat-card-content>
         <mat-divider></mat-divider>
         <mat-card-actions>
-          <button mat-raised-button (click)="edit(product)">editar</button>
+          <button mat-raised-button color="primary" (click)="edit(product)">
+            editar
+          </button>
           <button mat-raised-button color="warn" (click)="delete()">
             deletar
           </button>
         </mat-card-actions>
-        <mat-card-footer>registro: {{product.registrationTime}}</mat-card-footer>
+        <mat-card-footer
+          >registro: {{ product.registrationTime }}</mat-card-footer
+        >
       </mat-card>
     </li>
   </ul>
 
-  <button mat-raised-button color="primary" (click)="newProduct()">novo</button>
+  <button mat-raised-button color="accent" (click)="newProduct()">novo</button>
 </div>
