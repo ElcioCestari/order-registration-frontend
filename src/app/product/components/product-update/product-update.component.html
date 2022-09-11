@@ -1,38 +1,71 @@
 <mat-card class="mat-elevation-z4">
-  <mat-card-content>
-    <mat-form-field>
-      <mat-label>Nome</mat-label>
-      <input matInput [(ngModel)]="product.name" placeholder="Produto" />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Categoria</mat-label>
-      <input
-        matInput
-        [(ngModel)]="product.category"
-        placeholder="Eletronicos"
-      />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Preço de compra</mat-label>
-      <input
-        matInput
-        [(ngModel)]="product.unitPurchasePrice"
-        type="number"
-        placeholder="R$0,00"
-      />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Preço de venda</mat-label>
-      <input
-        matInput
-        [(ngModel)]="product.unitPurchaseSale"
-        type="number"
-        placeholder="0,00"
-      />
-    </mat-form-field>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button (click)="cancel()">cancel</button>
-    <button mat-raised-button (click)="update()" color="primary">save</button>
-  </mat-card-actions>
+  <form #productForm="ngForm">
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input
+          matInput
+          [(ngModel)]="product.name"
+          name="name"
+          #name="ngModel"
+          placeholder="Produto"
+          required
+        />
+        <mat-error *ngIf="name.invalid">campo obrigatorio</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Categoria</mat-label>
+        <input
+          matInput
+          [(ngModel)]="product.category"
+          name="category"
+          placeholder="Eletronicos"
+          required
+          #category="ngModel"
+        />
+        <mat-error *ngIf="category.invalid">campo obrigatorio</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Preço de compra</mat-label>
+        <input
+          matInput
+          [(ngModel)]="product.unitPurchasePrice"
+          name="unitPurchasePrice"
+          type="number"
+          placeholder="R$0,00"
+          #purchasePrice="ngModel"
+          required
+        />
+        <mat-error *ngIf="purchasePrice.invalid">valor inválido</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Preço de venda</mat-label>
+        <input
+          matInput
+          [(ngModel)]="product.unitPurchaseSale"
+          name="unitPurchaseSale"
+          type="number"
+          placeholder="0,00"
+          required
+          #purchaseSale
+        />
+        <mat-hint align="end"
+          >valor deve ser maior que
+          {{ purchasePrice.value | currency: 'BRL' }}</mat-hint
+        >
+        <mat-error>valor invalido</mat-error>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="cancel()">cancel</button>
+      <button
+        mat-raised-button
+        [disabled]="productForm.invalid"
+        (click)="update()"
+        color="primary"
+      >
+        save
+      </button>
+    </mat-card-actions>
+  </form>
 </mat-card>
