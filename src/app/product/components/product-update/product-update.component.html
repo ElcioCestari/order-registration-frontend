@@ -47,13 +47,13 @@
           type="number"
           placeholder="0,00"
           required
-          #purchaseSale
+          #purchaseSale="ngModel"
         />
         <mat-hint align="end"
           >valor deve ser maior que
           {{ purchasePrice.value | currency: 'BRL' }}</mat-hint
         >
-        <mat-error>valor invalido</mat-error>
+        <mat-error *ngIf="purchaseSale.invalid">valor invalido</mat-error>
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
