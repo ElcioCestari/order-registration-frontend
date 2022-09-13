@@ -1,4 +1,4 @@
 export enum Category {
-  ELETRONIC = 'Eletrônicos',
-  NOT_DEFINED = 'Categoria não definida'
+  ELETRONIC = 'ELETRONIC',
+  NOT_DEFINED = 'NOT_DEFINED'
 }

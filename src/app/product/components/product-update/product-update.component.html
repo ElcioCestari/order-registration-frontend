@@ -15,15 +15,14 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Categoria</mat-label>
-        <input
-          matInput
-          [(ngModel)]="product.category"
-          name="category"
-          placeholder="Eletronicos"
-          required
-          #category="ngModel"
-        />
-        <mat-error *ngIf="category.invalid">campo obrigatorio</mat-error>
+        <mat-select [(ngModel)]="selectedCategory" name="category">
+          <mat-option
+            *ngFor="let category of categories"
+            [value]="category"
+            >{{ category }}</mat-option
+          >
+        </mat-select>
+        <!--        <mat-error *ngIf="categories.invalid">campo obrigatorio</mat-error>-->
       </mat-form-field>
       <mat-form-field>
         <mat-label>Preço de compra</mat-label>
