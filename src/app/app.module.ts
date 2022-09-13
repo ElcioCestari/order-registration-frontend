@@ -26,7 +26,7 @@ import { UserCreateComponent } from './user/components/user-create/user-create.c
 import { UserLoginComponent } from './user/components/user-login/user-login.component';
 import { UserListComponent } from './user/components/user-list/user-list.component';
 import { ProductUpdateComponent } from './product/components/product-update/product-update.component';
-import {MatSelectModule} from "@angular/material/select";
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [

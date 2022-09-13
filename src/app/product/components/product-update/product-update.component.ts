@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {Product} from '../../../core/model/product';
-import {Category} from '../../../core/model/category';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ProductService} from '../../services/product.service';
-import {SnackbarService} from '../../../core/services/snackbar.service';
-import {CategoryService} from "../../../core/services/category.service";
+import { Component, OnInit } from '@angular/core';
+import { Product } from '../../../core/model/product';
+import { Category } from '../../../core/model/category';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductService } from '../../services/product.service';
+import { SnackbarService } from '../../../core/services/snackbar.service';
+import { CategoryService } from '../../../core/services/category.service';
 
 @Component({
   selector: 'app-product-update',
@@ -30,7 +30,7 @@ export class ProductUpdateComponent implements OnInit {
     private readonly service: ProductService,
     private readonly snackBar: SnackbarService,
     private readonly activeRoute: ActivatedRoute,
-    private readonly categoryService: CategoryService,
+    private readonly categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
@@ -48,7 +48,9 @@ export class ProductUpdateComponent implements OnInit {
   }
 
   update(): void {
-    this.product.category = this.categoryService.getByValue(this.selectedCategory);
+    this.product.category = this.categoryService.getByValue(
+      this.selectedCategory
+    );
     this.service.update(this.product).subscribe({
       next: () => {
         this.snackBar.show('Produto salvo!');
