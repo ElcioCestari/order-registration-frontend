@@ -10,6 +10,14 @@ import { Product } from '../../../core/model/product';
 })
 export class ProductListComponent implements OnInit {
   list: Product[] = [];
+  displayedColumns: string[] = [
+    'name',
+    'buy',
+    'sell',
+    'available',
+    'registrationDate',
+    'actions'
+  ];
   constructor(
     private readonly router: Router,
     private readonly service: ProductService

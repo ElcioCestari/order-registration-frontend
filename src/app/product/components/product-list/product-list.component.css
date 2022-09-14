@@ -1,6 +1,10 @@
 .container {
   margin: 10px;
 }
+
+table {
+  width: 100%;
+}
 mat-card {
   margin: 10px;
 }
@@ -16,4 +20,15 @@ mat-card mat-card-actions {
 
 ul li {
   text-decoration: none;
+}
+
+.fab {
+  margin: 10px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: end;
+}
+
+.mat-column-actions {
+  text-align: center;
 }

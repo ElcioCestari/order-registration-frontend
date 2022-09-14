@@ -27,6 +27,7 @@ import { UserLoginComponent } from './user/components/user-login/user-login.comp
 import { UserListComponent } from './user/components/user-list/user-list.component';
 import { ProductUpdateComponent } from './product/components/product-update/product-update.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { MatSelectModule } from '@angular/material/select';
     FormsModule,
     MatButtonModule,
     MatIconModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
