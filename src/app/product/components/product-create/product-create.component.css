@@ -14,3 +14,7 @@ mat-card-actions {
   background-color: var(--accent-primary);
   border-radius: 5px;
 }
+
+input {
+  caret-color: var(--accent-secondary);
+}

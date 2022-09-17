@@ -12,10 +12,10 @@ import { SnackbarService } from '../../../core/services/snackbar.service';
 })
 export class ProductCreateComponent implements OnInit {
   product: Product = {
-    name: 'celular',
-    description: 'eletronico',
-    unitPurchasePrice: 1000,
-    unitPurchaseSale: 1100,
+    name: '',
+    description: '',
+    unitPurchasePrice: 0,
+    unitPurchaseSale: 0,
     category: Category.NOT_DEFINED,
     stock: { quantity: 0 },
     registrationTime: new Date(1970, 12, 31),
