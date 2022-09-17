@@ -3,6 +3,6 @@
   <p>{{data.value}}</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancelar</button>
-<!--  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>-->
+  <button mat-button mat-dialog-close="true">Cancelar</button>
+  <button mat-button (click)="ok()">Ok</button>
 </div>

@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../../core/model/product';
 import { SnackbarService } from '../../../core/services/snackbar.service';
-import { MatDialog } from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../core/components/confirm-dialog/confirm-dialog.component';
+import {Choice} from "../../../core/model/choice";
 
 @Component({
   selector: 'app-product-list',
@@ -42,12 +43,20 @@ export class ProductListComponent implements OnInit {
   }
 
   edit(product: Product): void {
-    this.openDialog(product);
     this.router.navigate([`/products/update/${product.id}`]);
   }
 
   delete(product: Product): void {
+    this.openDialog(product)
+      .afterClosed()
+      .subscribe(userChoice => {
+          if(userChoice === Choice.OK) {
+            this.callServiceDelete(product);
+          }
+      });
+  }
 
+  private callServiceDelete(product: Product) {
     this.service.delete(product.id!).subscribe({
       next: () => {
         this.snackBar.show('item deletado!');
@@ -59,10 +68,14 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  openDialog(product: Product): void {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '250px',
-      data: { title: 'deletar', value: `${product.name}?` }
+  openDialog(product: Product): MatDialogRef<any> {
+    return this.dialog.open(ConfirmDialogComponent, {
+      width: '450px',
+      data: {
+        title: 'deletar',
+        value: `${product.name}?`,
+        action: () => {console.log('ta indo')}
+      }
     });
   }
 }
