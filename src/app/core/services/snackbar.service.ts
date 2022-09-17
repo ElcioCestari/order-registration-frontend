@@ -7,9 +7,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SnackbarService {
   constructor(private readonly snackBar: MatSnackBar) {}
 
-  public show(msg: string) {
+  public show(msg: string, success: boolean = true) {
     this.snackBar.open(msg, `X`, {
-      panelClass: ['snackBar'],
+      panelClass: success? ['snackBar'] : ['snackBarError'],
       duration: 3000,
       horizontalPosition: 'right',
       verticalPosition: 'top'

@@ -18,10 +18,15 @@ body {
   --primary-text: #ffffff;
   --background: #303030;
   --background-secondary: #424242;
+  --warn: tomato;
 }
 
 .snackBar {
   background-color: var(--primary-700);
+  color: var(--primary-text);
+}
+.snackBarError {
+  background-color: var(--warn);
   color: var(--primary-text);
 }
 

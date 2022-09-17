@@ -49,7 +49,7 @@ export class ProductListComponent implements OnInit {
         this.load();
       },
       error: () => {
-        this.snackBar.show('Algo deu errado!');
+        this.snackBar.show('Algo deu errado!', false);
       }
     });
   }
