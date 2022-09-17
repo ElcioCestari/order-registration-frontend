@@ -28,6 +28,9 @@ import { UserListComponent } from './user/components/user-list/user-list.compone
 import { ProductUpdateComponent } from './product/components/product-update/product-update.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { ConfirmDialogComponent } from './core/components/confirm-dialog/confirm-dialog.component';
+import { MatDialogModule} from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +44,9 @@ import { MatTableModule } from '@angular/material/table';
     UserCreateComponent,
     UserLoginComponent,
     UserListComponent,
-    ProductUpdateComponent
+    ProductUpdateComponent,
+    ConfirmDialogComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -60,7 +65,8 @@ import { MatTableModule } from '@angular/material/table';
     MatButtonModule,
     MatIconModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
