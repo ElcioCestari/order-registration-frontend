@@ -46,7 +46,7 @@ export class ProductListComponent implements OnInit {
     this.service.delete(product.id!).subscribe({
       next: () => {
         this.snackBar.show('item deletado!');
-        this.router.navigate(['/products/list']);
+        this.load();
       },
       error: () => {
         this.snackBar.show('Algo deu errado!');
