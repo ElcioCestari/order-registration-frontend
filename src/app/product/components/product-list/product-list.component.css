@@ -36,3 +36,8 @@ ul li {
 .btn-edit mat-icon {
   color: var(--accent-primary);
 }
+
+.mat-header-cell {
+  font-size: 1.4em;
+  color: var(--primary-500);
+}

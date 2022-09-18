@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../../core/model/product';
 import { SnackbarService } from '../../../core/services/snackbar.service';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../core/components/confirm-dialog/confirm-dialog.component';
-import {Choice} from "../../../core/model/choice";
+import { Choice } from '../../../core/model/choice';
 
 @Component({
   selector: 'app-product-list',
@@ -50,9 +50,9 @@ export class ProductListComponent implements OnInit {
     this.openDialog(product)
       .afterClosed()
       .subscribe(userChoice => {
-          if(userChoice === Choice.OK) {
-            this.callServiceDelete(product);
-          }
+        if (userChoice === Choice.OK) {
+          this.callServiceDelete(product);
+        }
       });
   }
 
@@ -74,7 +74,9 @@ export class ProductListComponent implements OnInit {
       data: {
         title: 'deletar',
         value: `${product.name}?`,
-        action: () => {console.log('ta indo')}
+        action: () => {
+          console.log('ta indo');
+        }
       }
     });
   }

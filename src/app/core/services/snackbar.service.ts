@@ -9,7 +9,7 @@ export class SnackbarService {
 
   public show(msg: string, success: boolean = true) {
     this.snackBar.open(msg, `X`, {
-      panelClass: success? ['snackBar'] : ['snackBarError'],
+      panelClass: success ? ['snackBar'] : ['snackBarError'],
       duration: 3000,
       horizontalPosition: 'right',
       verticalPosition: 'top'

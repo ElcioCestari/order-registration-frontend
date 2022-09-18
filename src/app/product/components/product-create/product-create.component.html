@@ -1,56 +1,65 @@
 <mat-card class="mat-elevation-z7">
   <mat-card-title>Crie um novo Produto</mat-card-title>
   <mat-card-content>
-    <mat-form-field>
-      <mat-label>Nome</mat-label>
-      <input
-        name="name"
-        #name="ngModel"
-        required
-        matInput
-        [(ngModel)]="product.name"
-        placeholder="Produto"
-      />
-      <mat-error *ngIf="name.invalid">campo obrigatório</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Descrição</mat-label>
-      <textarea
-        matInput
-        name="description"
-        #description="ngModel"
-        [(ngModel)]="product.description"
-        placeholder="Digite a descrição do produto"
-        required
-      ></textarea>
-      <mat-error *ngIf="description.invalid"></mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Preço de compra</mat-label>
-      <input
-        matInput
-        [(ngModel)]="product.unitPurchasePrice"
-        name="unitPurchasePrice"
-        #unitPurchasePrice="ngModel"
-        placeholder="Preço de compra R$"
-      />
-      <mat-error *ngIf="unitPurchasePrice.invalid">campo invalido</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Preço de venda</mat-label>
-      <input
-        matInput
-        [(ngModel)]="product.unitPurchaseSale"
-        placeholder="Preço de venda R$"
-        name="unitPurchaseSale"
-        #unitPurchaseSale="ngModel"
-        required
-      />
-      <mat-error *ngIf="unitPurchaseSale.invalid">campo invalido</mat-error>
-    </mat-form-field>
-    <mat-card-actions>
-      <button mat-raised-button (click)="cancel()">cancelar</button>
-      <button mat-raised-button color="primary" (click)="save()">salvar</button>
-    </mat-card-actions>
+    <form #productForm="ngForm">
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input
+          name="name"
+          #name="ngModel"
+          required
+          matInput
+          [(ngModel)]="product.name"
+          placeholder="Produto"
+        />
+        <mat-error *ngIf="name.invalid">campo obrigatório</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Descrição</mat-label>
+        <textarea
+          matInput
+          name="description"
+          #description="ngModel"
+          [(ngModel)]="product.description"
+          placeholder="Digite a descrição do produto"
+          required
+        ></textarea>
+        <mat-error *ngIf="description.invalid"></mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Preço de compra</mat-label>
+        <input
+          matInput
+          [(ngModel)]="product.unitPurchasePrice"
+          name="unitPurchasePrice"
+          #unitPurchasePrice="ngModel"
+          placeholder="Preço de compra R$"
+        />
+        <mat-error *ngIf="unitPurchasePrice.invalid">campo invalido</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Preço de venda</mat-label>
+        <input
+          matInput
+          [(ngModel)]="product.unitPurchaseSale"
+          placeholder="Preço de venda R$"
+          name="unitPurchaseSale"
+          #unitPurchaseSale="ngModel"
+          required
+        />
+        <mat-error *ngIf="unitPurchaseSale.invalid">campo invalido</mat-error>
+      </mat-form-field>
+      <mat-card-actions>
+        <button mat-raised-button (click)="cancel()">cancelar</button>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="productForm.invalid"
+          (click)="save()"
+        >
+          salvar
+        </button>
+      </mat-card-actions>
+    </form>
   </mat-card-content>
 </mat-card>

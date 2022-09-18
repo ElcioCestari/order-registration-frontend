@@ -29,8 +29,7 @@ import { ProductUpdateComponent } from './product/components/product-update/prod
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { ConfirmDialogComponent } from './core/components/confirm-dialog/confirm-dialog.component';
-import { MatDialogModule} from '@angular/material/dialog';
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -45,8 +44,7 @@ import { MatDialogModule} from '@angular/material/dialog';
     UserLoginComponent,
     UserListComponent,
     ProductUpdateComponent,
-    ConfirmDialogComponent,
-
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

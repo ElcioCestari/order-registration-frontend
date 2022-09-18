@@ -1,4 +1,4 @@
 export enum Choice {
   CANCEL,
-  OK,
+  OK
 }
