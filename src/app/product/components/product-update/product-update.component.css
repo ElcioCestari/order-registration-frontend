@@ -5,3 +5,7 @@ mat-card mat-card-content {
   display: flex;
   flex-direction: column;
 }
+
+input {
+  caret-color: var(--accent-secondary);
+}
