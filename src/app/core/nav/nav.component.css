@@ -4,3 +4,11 @@
 .sidenav {
   background-color: var(--primary-800);
 }
+
+.toolbar {
+  background-color: var(--accent-primary);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
