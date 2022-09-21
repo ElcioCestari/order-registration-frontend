@@ -31,6 +31,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ConfirmDialogComponent } from './core/components/confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NavMobileComponent } from './core/nav/nav-mobile/nav-mobile.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { NavMobileComponent } from './core/nav/nav-mobile/nav-mobile.component';
     MatIconModule,
     MatSelectModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

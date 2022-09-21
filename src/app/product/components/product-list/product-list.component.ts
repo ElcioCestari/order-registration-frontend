@@ -6,6 +6,7 @@ import { SnackbarService } from '../../../core/services/snackbar.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../core/components/confirm-dialog/confirm-dialog.component';
 import { Choice } from '../../../core/model/choice';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-product-list',
@@ -22,16 +23,25 @@ export class ProductListComponent implements OnInit {
     'registrationDate',
     'actions'
   ];
+  isMobile: boolean = false;
 
   constructor(
     private readonly router: Router,
     private readonly service: ProductService,
     private readonly snackBar: SnackbarService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly responsive: BreakpointObserver
   ) {}
 
   ngOnInit(): void {
     this.load();
+    this.responsive.observe(Breakpoints.HandsetPortrait).subscribe(result => {
+      if (result.matches) {
+        this.isMobile = true;
+      } else {
+        this.isMobile = false;
+      }
+    });
   }
 
   newProduct(): void {
