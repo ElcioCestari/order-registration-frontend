@@ -7,17 +7,17 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  opened: boolean = false;
+  isMobileSize: boolean = false;
   phone: string | undefined = undefined;
   constructor(private readonly responsive: BreakpointObserver) {}
 
   ngOnInit(): void {
     this.responsive.observe(Breakpoints.HandsetPortrait).subscribe(result => {
       if (result.matches) {
-        this.opened = false;
+        this.isMobileSize = true;
         this.phone = undefined;
       } else {
-        this.opened = true;
+        this.isMobileSize = false;
         this.phone = 'cell-phone';
       }
     });
