@@ -1,0 +1,22 @@
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+.container p {
+  text-align: left;
+  margin: 50px;
+  font-size: 3em;
+  line-height: 1.2;
+  word-spacing: 3px;
+  color: var(--primary-500);
+}
+
+.container strong {
+  color: var(--accent-primary);
+}

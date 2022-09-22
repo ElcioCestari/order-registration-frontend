@@ -32,6 +32,7 @@ import { ConfirmDialogComponent } from './core/components/confirm-dialog/confirm
 import { MatDialogModule } from '@angular/material/dialog';
 import { NavMobileComponent } from './core/nav/nav-mobile/nav-mobile.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { MatMenuModule } from '@angular/material/menu';
     UserListComponent,
     ProductUpdateComponent,
     ConfirmDialogComponent,
-    NavMobileComponent
+    NavMobileComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

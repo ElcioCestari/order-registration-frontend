@@ -4,8 +4,13 @@ import { ProductCreateComponent } from './product/components/product-create/prod
 import { ProductListComponent } from './product/components/product-list/product-list.component';
 import { UserLoginComponent } from './user/components/user-login/user-login.component';
 import { ProductUpdateComponent } from './product/components/product-update/product-update.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent
+  },
   {
     path: 'products/list',
     component: ProductListComponent
