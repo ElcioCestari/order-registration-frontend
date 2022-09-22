@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-interface UserSystem {
-  username: string;
-  password: string;
-  authorities: string[];
-}
+import { UserService } from '../../service/user.service';
+import { SnackbarService } from '../../../core/services/snackbar.service';
+import { UserSystem } from '../../../core/model/user-system';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-login',
@@ -17,7 +15,23 @@ export class UserLoginComponent implements OnInit {
     password: '',
     authorities: ['USER']
   };
-  constructor() {}
+  constructor(
+    private readonly service: UserService,
+    private readonly router: Router,
+    private readonly snackBar: SnackbarService
+  ) {}
 
   ngOnInit(): void {}
+
+  login() {
+    this.service.login(this.user).subscribe({
+      next: () => {
+        this.snackBar.show('sucesso!');
+        this.router.navigate(['/']);
+      },
+      error: () => {
+        this.snackBar.show('algo deu errado.', false);
+      }
+    });
+  }
 }
