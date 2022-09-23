@@ -1,32 +1,43 @@
 <mat-card class="mat-elevation-z7 center">
   <mat-card-title>login</mat-card-title>
   <mat-card-content>
-    <mat-form-field>
-      <mat-label>Username</mat-label>
-      <input
-        matInput
-        [(ngModel)]="user.username"
-        placeholder="Username"
-        #username="ngModel"
-        required
-      />
-      <mat-error *ngIf="username.invalid">campo inválido</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input
-        matInput
-        [(ngModel)]="user.password"
-        type="password"
-        #password="ngModel"
-        required
-        placeholder="Digite a descrição do produto"
-      />
-      <mat-error *ngIf="password.invalid">campo inválido</mat-error>
-    </mat-form-field>
-    <mat-card-actions>
-      <button mat-raised-button routerLink="/">cancelar</button>
-      <button mat-raised-button color="primary" (click)="login()">OK</button>
-    </mat-card-actions>
+    <form #loginForm="ngForm">
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.username"
+          placeholder="Username"
+          #username="ngModel"
+          name="username"
+          required
+        />
+        <mat-error *ngIf="username.invalid">campo inválido</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.password"
+          type="password"
+          #password="ngModel"
+          name="password"
+          required
+          placeholder="Digite a descrição do produto"
+        />
+        <mat-error *ngIf="password.invalid">campo inválido</mat-error>
+      </mat-form-field>
+      <mat-card-actions>
+        <button mat-raised-button routerLink="/">cancelar</button>
+        <button
+          mat-raised-button
+          [disabled]="loginForm.invalid"
+          color="primary"
+          (click)="login()"
+        >
+          logar
+        </button>
+      </mat-card-actions>
+    </form>
   </mat-card-content>
 </mat-card>

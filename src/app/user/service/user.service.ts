@@ -13,4 +13,8 @@ export class UserService {
   login(user: UserSystem): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, user);
   }
+
+  save(user: UserSystem): Observable<UserSystem> {
+    return this.http.post<UserSystem>(`${this.baseUrl}`, user);
+  }
 }

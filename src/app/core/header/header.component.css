@@ -31,12 +31,12 @@ button:hover {
   flex: 1 1 auto;
 }
 
-.mat-menu-item i{
+.mat-menu-item i {
   vertical-align: baseline;
   margin-right: 5px;
 }
 
-.mat-menu-item span{
+.mat-menu-item span {
   vertical-align: super;
   font-size: 1.2em;
 }

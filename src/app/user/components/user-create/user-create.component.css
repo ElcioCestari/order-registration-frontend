@@ -1,0 +1,12 @@
+.mat-card {
+  margin: 25px;
+}
+mat-card-content {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+}
+mat-card-actions {
+  display: flex;
+  justify-content: end;
+}

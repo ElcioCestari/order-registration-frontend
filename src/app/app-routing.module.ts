@@ -5,6 +5,7 @@ import { ProductListComponent } from './product/components/product-list/product-
 import { UserLoginComponent } from './user/components/user-login/user-login.component';
 import { ProductUpdateComponent } from './product/components/product-update/product-update.component';
 import { HomeComponent } from './home/home.component';
+import { UserCreateComponent } from './user/components/user-create/user-create.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'user/sign',
     component: UserLoginComponent
+  },
+  {
+    path: 'user/create',
+    component: UserCreateComponent
   }
 ];
 
