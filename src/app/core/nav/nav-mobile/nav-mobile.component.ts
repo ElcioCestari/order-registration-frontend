@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./nav-mobile.component.css']
 })
 export class NavMobileComponent implements OnInit {
-  @Input() opened: boolean = false;
+  @Input() opened = false;
 
   constructor() {}
 

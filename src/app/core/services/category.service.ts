@@ -12,7 +12,7 @@ export class CategoryService {
   }
 
   public getByValue(category: string): Category {
-    let result = this.getKeys()[this.getValues().indexOf(category)];
+    const result = this.getKeys()[this.getValues().indexOf(category)];
     return this.getByKey(result);
   }
 

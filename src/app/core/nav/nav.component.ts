@@ -7,7 +7,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  isMobileSize: boolean = false;
+  isMobileSize = false;
   phone: string | undefined = undefined;
   constructor(private readonly responsive: BreakpointObserver) {}
 

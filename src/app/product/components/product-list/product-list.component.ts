@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../../core/model/product';
@@ -7,14 +7,16 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../core/components/confirm-dialog/confirm-dialog.component';
 import { Choice } from '../../../core/model/choice';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit {
-  list: Product[] = [];
+export class ProductListComponent implements OnInit, AfterViewInit {
+  list = new MatTableDataSource<Product>([]);
   displayedColumns: string[] = [
     'name',
     'buy',
@@ -23,7 +25,9 @@ export class ProductListComponent implements OnInit {
     'registrationDate',
     'actions'
   ];
-  isMobile: boolean = false;
+  isMobile = false;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private readonly router: Router,
@@ -32,6 +36,10 @@ export class ProductListComponent implements OnInit {
     private readonly dialog: MatDialog,
     private readonly responsive: BreakpointObserver
   ) {}
+
+  ngAfterViewInit(): void {
+    this.list.paginator = this.paginator;
+  }
 
   ngOnInit(): void {
     this.load();
@@ -49,7 +57,7 @@ export class ProductListComponent implements OnInit {
   }
 
   load(): void {
-    this.service.read().subscribe(list => (this.list = list));
+    this.service.read().subscribe(list => (this.list.data = list));
   }
 
   edit(product: Product): void {
