@@ -7,7 +7,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../core/components/confirm-dialog/confirm-dialog.component';
 import { Choice } from '../../../core/model/choice';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { MatPaginator } from '@angular/material/paginator';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -17,6 +17,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ProductListComponent implements OnInit, AfterViewInit {
   list = new MatTableDataSource<Product>([]);
+  pageEvent!: PageEvent;
   displayedColumns: string[] = [
     'name',
     'buy',
@@ -26,6 +27,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     'actions'
   ];
   isMobile = false;
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -38,6 +40,9 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngAfterViewInit(): void {
+    console.log(`paginator: ${this.list.paginator?.pageSize}`)
+    console.log(`paginator: ${this.list.paginator?.page}`)
+    console.log(`paginator: ${this.list.paginator?.nextPage()}`)
     this.list.paginator = this.paginator;
   }
 
@@ -56,8 +61,8 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/products/create']);
   }
 
-  load(): void {
-    this.service.read().subscribe(list => (this.list.data = list));
+  load(size: number = 10, page: number = 1): void {
+    this.service.read(size, page).subscribe(list => (this.list.data = list));
   }
 
   edit(product: Product): void {
@@ -97,5 +102,12 @@ export class ProductListComponent implements OnInit, AfterViewInit {
         }
       }
     });
+  }
+
+  pageNavigations(event?: PageEvent) {
+    console.log(`page size: ${event?.pageSize}`)
+    console.log(`page length: ${event?.length}`)
+    console.log(`page index: ${event?.pageIndex}`)
+    this.load(event?.pageSize, event?.pageIndex);
   }
 }

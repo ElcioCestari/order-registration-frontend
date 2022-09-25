@@ -73,6 +73,7 @@
   <mat-paginator
     aria-label="seleciona a pagina de produtos"
     showFirstLastButtons
+    (page)="pageNavigations($event)"
     [pageSizeOptions]="[5, 10, 20]"
   ></mat-paginator>
   <div class="fab">

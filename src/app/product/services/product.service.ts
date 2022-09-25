@@ -14,8 +14,8 @@ export class ProductService {
     return this.http.post<Product>(`${this.baseUrl}`, product).pipe(p => p);
   }
 
-  read(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.baseUrl}`);
+  read(size: number, page: number): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.baseUrl}?size=${size}&page=${page}`);
   }
 
   update(product: Product): Observable<Product> {
