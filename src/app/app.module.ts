@@ -33,7 +33,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NavMobileComponent } from './core/nav/nav-mobile/nav-mobile.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { HomeComponent } from './home/home.component';
-import { ProductListPaginatedComponent } from './product/components/product-list-paginated/product-list-paginated.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
@@ -52,7 +51,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ConfirmDialogComponent,
     NavMobileComponent,
     HomeComponent,
-    ProductListPaginatedComponent
   ],
   imports: [
     BrowserModule,
