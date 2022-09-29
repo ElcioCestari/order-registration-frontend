@@ -15,14 +15,14 @@ export class ProductService {
     return this.http.post<Product>(`${this.baseUrl}`, product).pipe(p => p);
   }
 
-  read(size: number, page: number): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.baseUrl}/all`);
-  }
+  // read(size: number, page: number): Observable<Product[]> {
+  //   return this.http.get<Product[]>(`${this.baseUrl}/all`);
+  // }
 
   // todo - try to fix pagination
-  // read(size: number, page: number): Observable<Page> {
-  //   return this.http.get<Page>(`${this.baseUrl}?size=${size}&page=${page}`);
-  // }
+  read(size: number, page: number): Observable<Page> {
+    return this.http.get<Page>(`${this.baseUrl}?size=${size}&page=${page}`);
+  }
 
   update(product: Product): Observable<Product> {
     return this.http

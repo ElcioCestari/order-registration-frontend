@@ -30,6 +30,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   @Input() pageSize!: number
+  size: number = 0;
 
   constructor(
     private readonly router: Router,
@@ -61,7 +62,8 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
   load(size: number = 10, page: number = 1): void {
     this.service.read(size, page).subscribe(list => {
-      this.list.data = list;
+      this.list.data = list.content;
+      this.size = list.totalElements;
       // this.list.data = list.content;
       // this.list.paginator!.length = list.totalElements;
       // console.log(this.pageSize);

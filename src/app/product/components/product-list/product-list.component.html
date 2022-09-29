@@ -11,7 +11,6 @@
         {{ element.unitPurchasePrice }}
       </td>
     </ng-container>
-    registrationDate
 
     <ng-container matColumnDef="sell">
       <th mat-header-cell *matHeaderCellDef>Venda</th>
@@ -73,6 +72,7 @@
   <mat-paginator
     aria-label="seleciona a pagina de produtos"
     (page)="pageNavigations($event)"
+    [length]="size"
     [pageSizeOptions]="[5, 10, 20]"
   ></mat-paginator>
   <div class="fab">
