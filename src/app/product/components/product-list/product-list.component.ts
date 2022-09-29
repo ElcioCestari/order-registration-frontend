@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../../core/model/product';
@@ -7,7 +7,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../core/components/confirm-dialog/confirm-dialog.component';
 import { Choice } from '../../../core/model/choice';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -17,7 +17,6 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ProductListComponent implements OnInit, AfterViewInit {
   list = new MatTableDataSource<Product>([]);
-  pageEvent!: PageEvent;
   displayedColumns: string[] = [
     'name',
     'buy',
@@ -28,8 +27,9 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   ];
   isMobile = false;
 
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  @Input() pageSize!: number
 
   constructor(
     private readonly router: Router,
@@ -40,10 +40,8 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngAfterViewInit(): void {
-    console.log(`paginator: ${this.list.paginator?.pageSize}`)
-    console.log(`paginator: ${this.list.paginator?.page}`)
-    console.log(`paginator: ${this.list.paginator?.nextPage()}`)
     this.list.paginator = this.paginator;
+    this.paginator.length = 0;
   }
 
   ngOnInit(): void {
@@ -62,7 +60,14 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   }
 
   load(size: number = 10, page: number = 1): void {
-    this.service.read(size, page).subscribe(list => (this.list.data = list));
+    this.service.read(size, page).subscribe(list => {
+      this.list.data = list;
+      // this.list.data = list.content;
+      // this.list.paginator!.length = list.totalElements;
+      // console.log(this.pageSize);
+      // this.size = list.totalElements;
+      // console.log(`size: ${this.size} total: ${list.totalElements}`)
+    });
   }
 
   edit(product: Product): void {
@@ -105,9 +110,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   }
 
   pageNavigations(event?: PageEvent) {
-    console.log(`page size: ${event?.pageSize}`)
-    console.log(`page length: ${event?.length}`)
-    console.log(`page index: ${event?.pageIndex}`)
     this.load(event?.pageSize, event?.pageIndex);
+    // console.log(`event = size: ${this.size} total: ${event}`)
   }
 }
