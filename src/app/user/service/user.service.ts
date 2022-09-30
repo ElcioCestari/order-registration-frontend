@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
   private readonly baseUrl = 'http://localhost:8080/users';
+
   constructor(private readonly http: HttpClient) {}
 
   login(user: UserSystem): Observable<any> {
@@ -16,5 +17,9 @@ export class UserService {
 
   save(user: UserSystem): Observable<UserSystem> {
     return this.http.post<UserSystem>(`${this.baseUrl}`, user);
+  }
+
+  read(): Observable<UserSystem[]> {
+    return this.http.get<UserSystem[]>(`${this.baseUrl}`);
   }
 }

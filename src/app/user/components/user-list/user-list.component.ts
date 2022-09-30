@@ -2,6 +2,9 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserSystem } from '../../../core/model/user-system';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import {Router} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
+import {UserService} from "../../service/user.service";
 
 @Component({
   selector: 'app-user-list',
@@ -14,9 +17,12 @@ export class UserListComponent implements OnInit, AfterViewInit {
   isMobile: boolean = false;
   @ViewChild(MatPaginator)private paginator!: MatPaginator;
 
-  constructor() {}
+  constructor(private readonly router: Router,
+              private readonly service: UserService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.load();
+  }
 
   ngAfterViewInit(): void {
     this.list.paginator = this.paginator;
@@ -29,4 +35,8 @@ export class UserListComponent implements OnInit, AfterViewInit {
   newProduct() {}
 
   pageNavigations($event: PageEvent) {}
+
+  private load(): void {
+    this.service.read().subscribe(list => this.list.data = list);
+  }
 }
