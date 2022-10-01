@@ -12,7 +12,7 @@ import {UserService} from "../../service/user.service";
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['username', 'authorities', 'ações'];
+  displayedColumns: string[] = ['username', 'authorities', 'actions'];
   list = new MatTableDataSource<UserSystem>([]);
   isMobile: boolean = false;
   @ViewChild(MatPaginator)private paginator!: MatPaginator;
