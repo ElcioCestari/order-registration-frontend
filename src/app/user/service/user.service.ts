@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserSystem } from '../../core/model/user-system';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,11 @@ export class UserService {
   constructor(private readonly http: HttpClient) {}
 
   login(user: UserSystem): Observable<any> {
-    return this.http.post(`${this.baseUrl}/login`, user);
+    const headers = new HttpHeaders({
+      Authorization: `Basic ${btoa(user.username + ':' + user.password)}`
+    });
+    console.log(headers.get('Authorization'));
+    return this.http.post(`${this.baseUrl}/login`, user, { headers: headers });
   }
 
   save(user: UserSystem): Observable<UserSystem> {
@@ -20,6 +24,9 @@ export class UserService {
   }
 
   read(): Observable<UserSystem[]> {
-    return this.http.get<UserSystem[]>(`${this.baseUrl}`);
+    const headers = new HttpHeaders({
+      Authorization: `Basic ${btoa('elcio:elcio')}`
+    });
+    return this.http.get<UserSystem[]>(`${this.baseUrl}`, { headers });
   }
 }

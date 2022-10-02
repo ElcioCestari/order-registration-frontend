@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../../core/model/product';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {Page} from "../../core/model/page";
+import { Page } from '../../core/model/page';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,10 @@ export class ProductService {
 
   // todo - try to fix pagination
   read(size: number, page: number): Observable<Page> {
-    return this.http.get<Page>(`${this.baseUrl}?size=${size}&page=${page}`);
+    const headers = new HttpHeaders({
+      Authorization: `Basic: ${btoa('elcio:elcio')}`
+    });
+    return this.http.get<Page>(`${this.baseUrl}?size=${size}&page=${page}`, {headers});
   }
 
   update(product: Product): Observable<Product> {
