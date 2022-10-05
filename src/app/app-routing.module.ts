@@ -6,7 +6,7 @@ import { UserLoginComponent } from './user/components/user-login/user-login.comp
 import { ProductUpdateComponent } from './product/components/product-update/product-update.component';
 import { HomeComponent } from './home/home.component';
 import { UserCreateComponent } from './user/components/user-create/user-create.component';
-import {UserListComponent} from "./user/components/user-list/user-list.component";
+import { UserListComponent } from './user/components/user-list/user-list.component';
 
 const routes: Routes = [
   {

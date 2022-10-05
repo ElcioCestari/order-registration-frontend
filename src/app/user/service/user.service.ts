@@ -11,12 +11,18 @@ export class UserService {
 
   constructor(private readonly http: HttpClient) {}
 
-  login(user: UserSystem): Observable<any> {
+  login(user: UserSystem): Observable<UserSystem> {
+    const basicAuth = `Basic ${btoa(user.username + ':' + user.password)}`;
     const headers = new HttpHeaders({
-      Authorization: `Basic ${btoa(user.username + ':' + user.password)}`
+      Authorization: basicAuth
     });
-    console.log(headers.get('Authorization'));
-    return this.http.post(`${this.baseUrl}/login`, user, { headers: headers });
+    return this.http
+      .post<UserSystem>(`${this.baseUrl}/login`, user, { headers: headers })
+      .pipe(source => {
+        sessionStorage.setItem('username', user.username);
+        sessionStorage.setItem('auth', basicAuth);
+        return source;
+      });
   }
 
   save(user: UserSystem): Observable<UserSystem> {
@@ -24,9 +30,6 @@ export class UserService {
   }
 
   read(): Observable<UserSystem[]> {
-    const headers = new HttpHeaders({
-      Authorization: `Basic ${btoa('elcio:elcio')}`
-    });
-    return this.http.get<UserSystem[]>(`${this.baseUrl}`, { headers });
+    return this.http.get<UserSystem[]>(`${this.baseUrl}`);
   }
 }

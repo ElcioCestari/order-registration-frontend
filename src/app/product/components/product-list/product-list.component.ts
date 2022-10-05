@@ -1,4 +1,10 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../../core/model/product';
@@ -29,7 +35,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  @Input() pageSize!: number
+  @Input() pageSize!: number;
   size: number = 0;
 
   constructor(
@@ -48,11 +54,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.load();
     this.responsive.observe(Breakpoints.HandsetPortrait).subscribe(result => {
-      if (result.matches) {
-        this.isMobile = true;
-      } else {
-        this.isMobile = false;
-      }
+      this.isMobile = result.matches;
     });
   }
 
@@ -62,8 +64,8 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
   load(size: number = 10, page: number = 1): void {
     this.service.read(size, page).subscribe(list => {
-      this.list.data = list.content;
-      this.size = list.totalElements;
+      this.list.data = list;
+      // this.size = list.totalElements;
       // this.list.data = list.content;
       // this.list.paginator!.length = list.totalElements;
       // console.log(this.pageSize);

@@ -1,10 +1,9 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserSystem } from '../../../core/model/user-system';
-import {MatPaginator, PageEvent} from '@angular/material/paginator';
-import {Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
-import {UserService} from "../../service/user.service";
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-user-list',
@@ -15,10 +14,12 @@ export class UserListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['username', 'authorities', 'actions'];
   list = new MatTableDataSource<UserSystem>([]);
   isMobile: boolean = false;
-  @ViewChild(MatPaginator)private paginator!: MatPaginator;
+  @ViewChild(MatPaginator) private paginator!: MatPaginator;
 
-  constructor(private readonly router: Router,
-              private readonly service: UserService) {}
+  constructor(
+    private readonly router: Router,
+    private readonly service: UserService
+  ) {}
 
   ngOnInit(): void {
     this.load();
@@ -37,6 +38,6 @@ export class UserListComponent implements OnInit, AfterViewInit {
   pageNavigations($event: PageEvent) {}
 
   private load(): void {
-    this.service.read().subscribe(list => this.list.data = list);
+    this.service.read().subscribe(list => (this.list.data = list));
   }
 }
