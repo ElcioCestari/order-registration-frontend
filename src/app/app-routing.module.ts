@@ -7,6 +7,8 @@ import { ProductUpdateComponent } from './product/components/product-update/prod
 import { HomeComponent } from './home/home.component';
 import { UserCreateComponent } from './user/components/user-create/user-create.component';
 import { UserListComponent } from './user/components/user-list/user-list.component';
+import { UserRoleGuard } from './core/guards/user-role.guard';
+import { AdminRoleGuard } from './core/guards/admin-role.guard';
 
 const routes: Routes = [
   {
@@ -14,28 +16,35 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'products/list',
-    component: ProductListComponent
-  },
-  {
-    path: 'products/create',
-    component: ProductCreateComponent
-  },
-  {
-    path: 'products/update/:id',
-    component: ProductUpdateComponent
+    path: 'products',
+    canActivateChild: [UserRoleGuard],
+    children: [
+      { path: 'list', component: ProductListComponent },
+      { path: 'create', component: ProductCreateComponent },
+      { path: 'update/:id', component: ProductUpdateComponent }
+    ]
   },
   {
     path: 'user/sign',
     component: UserLoginComponent
   },
   {
-    path: 'user/create',
-    component: UserCreateComponent
-  },
-  {
-    path: 'user/list',
-    component: UserListComponent
+    path: 'user',
+    canActivateChild: [AdminRoleGuard],
+    children: [
+      {
+        path: 'create',
+        component: UserCreateComponent
+      },
+      {
+        path: 'list',
+        component: UserListComponent
+      },
+      {
+        path: 'update/:id',
+        component: UserListComponent
+      }
+    ]
   }
 ];
 
