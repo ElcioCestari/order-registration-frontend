@@ -20,6 +20,7 @@ export class UserService {
       .post<UserSystem>(`${this.baseUrl}/login`, user, { headers: headers })
       .pipe(source => {
         sessionStorage.setItem('username', user.username);
+        sessionStorage.setItem('authorities', user.authorities.join(','));
         sessionStorage.setItem('auth', basicAuth);
         return source;
       });

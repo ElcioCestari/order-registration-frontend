@@ -3,33 +3,37 @@ import {
   ActivatedRouteSnapshot,
   CanActivate,
   CanActivateChild,
-  RouterStateSnapshot,
-  UrlTree
+  Router,
+  RouterStateSnapshot
 } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminRoleGuard implements CanActivate, CanActivateChild {
+  constructor(private router: Router) {}
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    return false;
+  ): boolean {
+    return this.isAuthorized();
   }
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    return true;
+  ): boolean {
+    return this.isAuthorized();
+  }
+
+  private isAuthorized() {
+    const result = sessionStorage.getItem('authorities');
+    console.log(result);
+    const permission = result === 'ADMIN';
+    if (!permission) {
+      alert('não autorizado');
+      this.router.navigate(['user/sign']);
+    }
+    return permission;
   }
 }
