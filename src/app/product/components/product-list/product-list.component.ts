@@ -28,7 +28,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     'buy',
     'sell',
     'available',
-    'registrationDate',
+    // 'registrationDate',
     'actions'
   ];
   isMobile = false;
