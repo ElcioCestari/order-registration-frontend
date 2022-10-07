@@ -1,5 +1,11 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
+import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  CanActivateChild,
+  Router,
+  RouterStateSnapshot
+} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +29,9 @@ export class UserRoleGuard implements CanActivate, CanActivateChild {
 
   private isAuthorized() {
     const result = sessionStorage.getItem('authorities');
-    console.log(result);
-    const permission = result === 'USER';
+    const permission =
+      result!.toUpperCase().includes('USER') ||
+      result!.toUpperCase().includes('ADMIN');
     if (!permission) {
       alert('não autorizado');
       this.router.navigate(['user/sign']);

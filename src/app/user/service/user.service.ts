@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserSystem } from '../../core/model/user-system';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -18,12 +18,14 @@ export class UserService {
     });
     return this.http
       .post<UserSystem>(`${this.baseUrl}/login`, user, { headers: headers })
-      .pipe(source => {
-        sessionStorage.setItem('username', user.username);
-        sessionStorage.setItem('authorities', user.authorities.join(','));
-        sessionStorage.setItem('auth', basicAuth);
-        return source;
-      });
+      .pipe(
+        map(result => {
+          sessionStorage.setItem('username', result.username);
+          sessionStorage.setItem('authorities', result.authorities.join(','));
+          sessionStorage.setItem('auth', basicAuth);
+          return result;
+        })
+      );
   }
 
   save(user: UserSystem): Observable<UserSystem> {
