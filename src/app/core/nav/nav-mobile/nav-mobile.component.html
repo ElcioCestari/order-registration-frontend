@@ -1,12 +1,12 @@
 <div *ngIf="opened">
   <mat-toolbar>
     <mat-toolbar-row class="toolbar">
-      <a mat-list-item routerLink="/">
-        <i class="material-icons">home</i>
-      </a>
-      <a mat-list-item routerLink="/products/list">
-        <i class="material-icons">storefront</i>
-      </a>
+      <button mat-button routerLink="user/list">
+        <em class="material-icons">account_circle</em>
+      </button>
+      <button mat-button routerLink="/products/list">
+        <em class="material-icons">storefront</em>
+      </button>
     </mat-toolbar-row>
   </mat-toolbar>
 </div>

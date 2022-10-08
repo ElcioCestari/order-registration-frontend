@@ -1,7 +1,13 @@
-.toolbar {
+.mat-toolbar {
   background-color: var(--primary-800);
+}
+.mat-toolbar-row {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  /*flex-wrap: wrap;*/
   justify-content: space-around;
+  text-align: center;
+}
+button {
+  color: white;
 }
