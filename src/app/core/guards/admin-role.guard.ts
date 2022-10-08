@@ -28,6 +28,11 @@ export class AdminRoleGuard implements CanActivate, CanActivateChild {
 
   private isAuthorized() {
     const result = sessionStorage.getItem('authorities');
+    if (!result) {
+      alert('não autorizado');
+      this.router.navigate(['user/sign']);
+      return false;
+    }
     const permission = result!.toUpperCase().includes('ADMIN');
     if (!permission) {
       alert('não autorizado');

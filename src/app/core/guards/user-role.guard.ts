@@ -29,6 +29,11 @@ export class UserRoleGuard implements CanActivate, CanActivateChild {
 
   private isAuthorized() {
     const result = sessionStorage.getItem('authorities');
+    if (!result) {
+      alert('não autorizado');
+      this.router.navigate(['user/sign']);
+      return false;
+    }
     const permission =
       result!.toUpperCase().includes('USER') ||
       result!.toUpperCase().includes('ADMIN');
