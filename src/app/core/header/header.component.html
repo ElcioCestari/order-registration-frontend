@@ -1,22 +1,25 @@
 <mat-toolbar class="header mat-elevation-z3">
   <span>
-    <a routerLink="">
-      <i class="material-icons md-36"> home </i>
+    <button
+      class="home"
+      matTooltip="home" mat-button routerLink="">
+      <em class="material-icons md-48"> home </em>
       <span>Início</span>
-    </a>
+    </button>
   </span>
   <span class="toolbar-separator"></span>
 
-  <button mat-button [matMenuTriggerFor]="menu">
-    <i class="material-icons md-36"> account_circle</i>
+  <button
+    matTooltip="usuário"  mat-button [matMenuTriggerFor]="menu">
+    <em class="material-icons md-36"> account_circle</em>
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item routerLink="user/create">
-      <i class="material-icons md-24">person_add</i>
+      <em class="material-icons md-24">person_add</em>
       <span>criar</span>
     </button>
     <button mat-menu-item routerLink="user/sign" color="primary">
-      <i class="material-icons md-24">login</i>
+      <em class="material-icons md-24">login</em>
       <span>login</span>
     </button>
   </mat-menu>

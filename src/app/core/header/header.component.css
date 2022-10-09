@@ -24,7 +24,7 @@ button {
 }
 .header a:hover,
 button:hover {
-  color: var(--accent-primary-shadow);
+  opacity: 70%;
 }
 
 .toolbar-separator {
@@ -39,4 +39,8 @@ button:hover {
 .mat-menu-item span {
   vertical-align: super;
   font-size: 1.2em;
+}
+
+.home {
+  font-size: 1.5em;
 }
