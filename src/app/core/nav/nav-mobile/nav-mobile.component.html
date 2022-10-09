@@ -1,7 +1,9 @@
 <div *ngIf="opened">
   <mat-toolbar>
     <mat-toolbar-row class="toolbar">
-      <button mat-button routerLink="user/list">
+      <button mat-button
+              matTooltip="usuários"
+              routerLink="user/list">
         <em class="material-icons">account_circle</em>
       </button>
       <button mat-button routerLink="/products/list">

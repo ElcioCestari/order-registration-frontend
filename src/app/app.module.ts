@@ -35,6 +35,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HomeComponent } from './home/home.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AuthInterceptorService } from './core/services/auth-interceptor.service';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { AuthInterceptorService } from './core/services/auth-interceptor.service
     MatTableModule,
     MatDialogModule,
     MatMenuModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTooltipModule
   ],
   providers: [
     {

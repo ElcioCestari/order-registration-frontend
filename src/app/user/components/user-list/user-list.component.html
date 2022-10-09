@@ -17,11 +17,17 @@
       <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td mat-cell *matCellDef="let element">
         <div *ngIf="!isMobile">
-          <button class="btn-delete" mat-icon-button (click)="delete(element)">
+          <button
+            matTooltip="deletar"
+            class="btn-delete"
+            mat-icon-button
+            (click)="delete(element)"
+          >
             <mat-icon>delete</mat-icon>
           </button>
           <button
             class="btn-edit"
+            matTooltip="editar"
             mat-icon-button
             color="primary"
             (click)="edit(element)"
@@ -62,6 +68,7 @@
   ></mat-paginator>
   <div class="fab">
     <button
+      matTooltip="novo usuário"
       mat-fab
       color="accent"
       class="mat-elevation-z10"
