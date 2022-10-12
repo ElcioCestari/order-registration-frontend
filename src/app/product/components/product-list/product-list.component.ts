@@ -15,6 +15,7 @@ import { Choice } from '../../../core/model/choice';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { QuantityPatchComponent } from '../product-patch/quantity-patch/quantity-patch.component';
 
 @Component({
   selector: 'app-product-list',
@@ -25,6 +26,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   list = new MatTableDataSource<Product>([]);
   displayedColumns: string[] = [
     'name',
+    'category',
     'buy',
     'sell',
     'available',
@@ -43,7 +45,8 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     private readonly service: ProductService,
     private readonly snackBar: SnackbarService,
     private readonly dialog: MatDialog,
-    private readonly responsive: BreakpointObserver
+    private readonly responsive: BreakpointObserver,
+    private readonly dialogQuantity: MatDialog
   ) {}
 
   ngAfterViewInit(): void {
@@ -78,6 +81,10 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     this.router.navigate([`/products/update/${product.id}`]);
   }
 
+  patchProduct(product: Product) {
+    this.openDialogPatchQuantity(product);
+  }
+
   delete(product: Product): void {
     this.openDialog(product)
       .afterClosed()
@@ -110,6 +117,13 @@ export class ProductListComponent implements OnInit, AfterViewInit {
           console.log('ta indo');
         }
       }
+    });
+  }
+
+  openDialogPatchQuantity(product: Product): MatDialogRef<any> {
+    return this.dialogQuantity.open(QuantityPatchComponent, {
+      width: '450px',
+      data: product
     });
   }
 

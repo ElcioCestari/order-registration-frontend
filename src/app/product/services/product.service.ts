@@ -39,4 +39,22 @@ export class ProductService {
   delete(id: string): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/${id}`);
   }
+
+  //TODO -define return type
+  patch(id: string, quantity: number) {
+    return this.http.patch(`${this.baseUrl}/${id}`, {
+      type: 'quantity',
+      value: quantity
+    }).subscribe({
+      next: value => {
+        console.log(value)
+      },
+      error: err => {
+        console.log(err)
+      },
+      complete: () => {
+        console.log('finished')
+      },
+    })
+  }
 }
