@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../../core/model/product';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -41,20 +41,7 @@ export class ProductService {
   }
 
   //TODO -define return type
-  patch(id: string, quantity: number) {
-    return this.http.patch(`${this.baseUrl}/${id}`, {
-      type: 'quantity',
-      value: quantity
-    }).subscribe({
-      next: value => {
-        console.log(value)
-      },
-      error: err => {
-        console.log(err)
-      },
-      complete: () => {
-        console.log('finished')
-      },
-    })
+  patch(id: string, product: Product) {
+    return this.http.patch(`${this.baseUrl}/${id}`, product);
   }
 }
