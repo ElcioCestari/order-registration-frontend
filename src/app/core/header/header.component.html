@@ -1,16 +1,13 @@
 <mat-toolbar class="header mat-elevation-z3">
   <span>
-    <button
-      class="home"
-      matTooltip="home" mat-button routerLink="">
+    <button class="home" matTooltip="home" mat-button routerLink="">
       <em class="material-icons md-48"> home </em>
       <span>Início</span>
     </button>
   </span>
   <span class="toolbar-separator"></span>
 
-  <button
-    matTooltip="usuário"  mat-button [matMenuTriggerFor]="menu">
+  <button matTooltip="usuário" mat-button [matMenuTriggerFor]="menu">
     <em class="material-icons md-36"> account_circle</em>
   </button>
   <mat-menu #menu="matMenu">

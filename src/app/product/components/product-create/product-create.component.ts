@@ -4,6 +4,7 @@ import { Category } from '../../../core/model/category';
 import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { SnackbarService } from '../../../core/services/snackbar.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-product-create',
@@ -36,12 +37,15 @@ export class ProductCreateComponent implements OnInit {
   }
 
   save(): void {
-    this.service.save(this.product).subscribe({
-      next: () => {
-        this.snackBar.show(`Produto salvo!`);
-        this.router.navigate(['/products/list']);
-      },
-      error: () => this.snackBar.show(`Algo deu errado!`)
-    });
+    this.service
+      .save(this.product)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.snackBar.show(`Produto salvo!`);
+          this.router.navigate(['/products/list']);
+        },
+        error: () => this.snackBar.show(`Algo deu errado!`)
+      });
   }
 }

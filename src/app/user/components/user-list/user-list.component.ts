@@ -4,6 +4,7 @@ import { UserSystem } from '../../../core/model/user-system';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-user-list',
@@ -38,6 +39,9 @@ export class UserListComponent implements OnInit, AfterViewInit {
   pageNavigations($event: PageEvent) {}
 
   private load(): void {
-    this.service.read().subscribe(list => (this.list.data = list));
+    this.service
+      .read()
+      .pipe(take(1))
+      .subscribe(list => (this.list.data = list));
   }
 }

@@ -3,6 +3,7 @@ import { UserSystem } from '../../../core/model/user-system';
 import { UserService } from '../../service/user.service';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-user-create',
@@ -23,15 +24,18 @@ export class UserCreateComponent implements OnInit {
   ngOnInit(): void {}
 
   save() {
-    this.service.save(this.user).subscribe({
-      next: () => {
-        this.snackBar.show('usuário salvo!');
-        this.router.navigate(['/product/list']);
-      },
-      error: err => {
-        console.log(err);
-        this.snackBar.show('algo deu errado');
-      }
-    });
+    this.service
+      .save(this.user)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.snackBar.show('usuário salvo!');
+          this.router.navigate(['/product/list']);
+        },
+        error: err => {
+          console.log(err);
+          this.snackBar.show('algo deu errado');
+        }
+      });
   }
 }

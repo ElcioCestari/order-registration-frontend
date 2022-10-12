@@ -3,6 +3,7 @@ import { UserService } from '../../service/user.service';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { UserSystem } from '../../../core/model/user-system';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-user-login',
@@ -24,14 +25,17 @@ export class UserLoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login() {
-    this.service.login(this.user).subscribe({
-      next: () => {
-        this.snackBar.show('sucesso!');
-        this.router.navigate(['/']);
-      },
-      error: () => {
-        this.snackBar.show('algo deu errado.', false);
-      }
-    });
+    this.service
+      .login(this.user)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.snackBar.show('sucesso!');
+          this.router.navigate(['/']);
+        },
+        error: () => {
+          this.snackBar.show('algo deu errado.', false);
+        }
+      });
   }
 }

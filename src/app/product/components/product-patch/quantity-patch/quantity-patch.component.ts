@@ -5,6 +5,7 @@ import { Product } from '../../../../core/model/product';
 import { ProductService } from '../../../services/product.service';
 import { Router } from '@angular/router';
 import { SnackbarService } from '../../../../core/services/snackbar.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-quantity-patch',
@@ -27,17 +28,18 @@ export class QuantityPatchComponent {
   }
 
   update() {
-    this.service.patch(this.product.id!, this.product).subscribe({
-      next: value => {
-        this.snackBar.show('Campo atualizado!');
-        this.dialogRef.close(Choice.OK);
-      },
-      error: err => {
-        this.snackBar.show('Algo deu errado!', false);
-      },
-      complete: () => {
-        console.log('finished');
-      }
-    });
+    this.service
+      .patch(this.product.id!, this.product)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.snackBar.show('Campo atualizado!');
+          this.dialogRef.close(Choice.OK);
+        },
+        error: err => {
+          console.error(err)
+          this.snackBar.show('Algo deu errado!', false);
+        }
+      });
   }
 }

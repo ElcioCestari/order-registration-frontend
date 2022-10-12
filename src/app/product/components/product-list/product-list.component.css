@@ -17,7 +17,8 @@ mat-card mat-card-actions {
   justify-content: end;
   margin-bottom: 0;
 }
-th, td {
+th,
+td {
   margin-right: 5px;
 }
 ul li {

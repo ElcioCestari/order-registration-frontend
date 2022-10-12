@@ -16,6 +16,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { QuantityPatchComponent } from '../product-patch/quantity-patch/quantity-patch.component';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -66,15 +67,18 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   }
 
   load(size: number = 10, page: number = 1): void {
-    this.service.read(size, page).subscribe(list => {
-      this.list.data = list;
-      // this.size = list.totalElements;
-      // this.list.data = list.content;
-      // this.list.paginator!.length = list.totalElements;
-      // console.log(this.pageSize);
-      // this.size = list.totalElements;
-      // console.log(`size: ${this.size} total: ${list.totalElements}`)
-    });
+    this.service
+      .read(size, page)
+      .pipe(take(1))
+      .subscribe(list => {
+        this.list.data = list;
+        // this.size = list.totalElements;
+        // this.list.data = list.content;
+        // this.list.paginator!.length = list.totalElements;
+        // console.log(this.pageSize);
+        // this.size = list.totalElements;
+        // console.log(`size: ${this.size} total: ${list.totalElements}`)
+      });
   }
 
   edit(product: Product): void {
@@ -88,6 +92,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   delete(product: Product): void {
     this.openDialog(product)
       .afterClosed()
+      .pipe(take(1))
       .subscribe(userChoice => {
         if (userChoice === Choice.OK) {
           this.callServiceDelete(product);
@@ -96,15 +101,18 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   }
 
   private callServiceDelete(product: Product) {
-    this.service.delete(product.id!).subscribe({
-      next: () => {
-        this.snackBar.show('item deletado!');
-        this.load();
-      },
-      error: () => {
-        this.snackBar.show('Algo deu errado!', false);
-      }
-    });
+    this.service
+      .delete(product.id!)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.snackBar.show('item deletado!');
+          this.load();
+        },
+        error: () => {
+          this.snackBar.show('Algo deu errado!', false);
+        }
+      });
   }
 
   openDialog(product: Product): MatDialogRef<any> {

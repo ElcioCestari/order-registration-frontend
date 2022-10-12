@@ -8,9 +8,8 @@ describe('QuantityPatchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ QuantityPatchComponent ]
-    })
-    .compileComponents();
+      declarations: [QuantityPatchComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

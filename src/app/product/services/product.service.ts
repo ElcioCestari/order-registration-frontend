@@ -41,7 +41,7 @@ export class ProductService {
   }
 
   //TODO -define return type
-  patch(id: string, product: Product) {
-    return this.http.patch(`${this.baseUrl}/${id}`, product);
+  patch(id: string, product: Product): Observable<Product> {
+    return this.http.patch<Product>(`${this.baseUrl}/${id}`, product);
   }
 }

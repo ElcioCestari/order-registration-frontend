@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { CategoryService } from '../../../core/services/category.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-product-update',
@@ -35,10 +36,13 @@ export class ProductUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.activeRoute.snapshot.paramMap.get('id');
-    this.service.readById(id!).subscribe({
-      next: produt => (this.product = produt),
-      error: () => this.snackBar.show(`Produto com id ${id} não encontrado`)
-    });
+    this.service
+      .readById(id!)
+      .pipe(take(1))
+      .subscribe({
+        next: produt => (this.product = produt),
+        error: () => this.snackBar.show(`Produto com id ${id} não encontrado`)
+      });
   }
 
   cancel(): void {
@@ -51,12 +55,15 @@ export class ProductUpdateComponent implements OnInit {
     this.product.category = this.categoryService.getByValue(
       this.selectedCategory
     );
-    this.service.update(this.product).subscribe({
-      next: () => {
-        this.snackBar.show('Produto salvo!');
-        this.router.navigate(['/products/list']);
-      },
-      error: () => this.snackBar.show('Erro ao atualizar produto')
-    });
+    this.service
+      .update(this.product)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.snackBar.show('Produto salvo!');
+          this.router.navigate(['/products/list']);
+        },
+        error: () => this.snackBar.show('Erro ao atualizar produto')
+      });
   }
 }
