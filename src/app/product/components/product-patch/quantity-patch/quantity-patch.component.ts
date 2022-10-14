@@ -37,7 +37,7 @@ export class QuantityPatchComponent {
           this.dialogRef.close(Choice.OK);
         },
         error: err => {
-          console.error(err)
+          console.error(err);
           this.snackBar.show('Algo deu errado!', false);
         }
       });
