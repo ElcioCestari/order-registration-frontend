@@ -36,4 +36,14 @@ export class UserService {
   read(): Observable<UserSystem[]> {
     return this.http.get<UserSystem[]>(`${this.baseUrl}`);
   }
+
+  delete(userSystem: UserSystem): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/${userSystem.username}`);
+  }
+
+  update(userSystem: UserSystem): Observable<UserSystem> {
+    return this.http.delete<UserSystem>(
+      `${this.baseUrl}/${userSystem.username}`
+    );
+  }
 }
