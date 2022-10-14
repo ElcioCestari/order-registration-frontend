@@ -34,7 +34,9 @@ export class UserListComponent implements OnInit, AfterViewInit {
 
   edit(element: UserSystem) {}
 
-  newProduct() {}
+  newProduct() {
+    this.router.navigate(['/user/create'])
+  }
 
   pageNavigations($event: PageEvent) {}
 
