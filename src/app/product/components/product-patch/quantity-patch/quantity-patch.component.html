@@ -1,29 +1,31 @@
 <form #productForm="ngForm">
-  <mat-card-content>
-    <mat-form-field>
-      <mat-label>Quantidade</mat-label>
-      <input
-        matInput
-        [(ngModel)]="product.stock.quantity"
-        name="quantity"
-        type="number"
-        min="0"
-        placeholder="1"
-        required
-        #purchaseSale="ngModel"
-      />
-      <mat-error *ngIf="purchaseSale.invalid">valor invalido</mat-error>
-    </mat-form-field>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button (click)="cancel()">cancel</button>
-    <button
-      mat-raised-button
-      [disabled]="productForm.invalid"
-      (click)="update()"
-      color="primary"
-    >
-      save
-    </button>
-  </mat-card-actions>
+  <div class="container">
+    <div class="input-fields">
+      <mat-form-field>
+        <mat-label>Quantidade</mat-label>
+        <input
+          matInput
+          [(ngModel)]="product.stock.quantity"
+          name="quantity"
+          type="number"
+          min="0"
+          placeholder="1"
+          required
+          #purchaseSale="ngModel"
+        />
+        <mat-error *ngIf="purchaseSale.invalid">valor invalido</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="actions">
+      <button mat-raised-button (click)="cancel()">cancel</button>
+      <button
+        mat-raised-button
+        [disabled]="productForm.invalid"
+        (click)="update()"
+        color="primary"
+      >
+        save
+      </button>
+    </div>
+  </div>
 </form>
