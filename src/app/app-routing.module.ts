@@ -9,6 +9,7 @@ import { UserCreateComponent } from './user/components/user-create/user-create.c
 import { UserListComponent } from './user/components/user-list/user-list.component';
 import { UserRoleGuard } from './core/guards/user-role.guard';
 import { AdminRoleGuard } from './core/guards/admin-role.guard';
+import {UserUpdateComponent} from "./user/user-update/user-update.component";
 
 const routes: Routes = [
   {
@@ -42,7 +43,7 @@ const routes: Routes = [
       },
       {
         path: 'update/:id',
-        component: UserListComponent
+        component: UserUpdateComponent
       }
     ]
   }

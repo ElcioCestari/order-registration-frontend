@@ -46,4 +46,8 @@ export class UserService {
       `${this.baseUrl}/${userSystem.username}`
     );
   }
+
+  readByUsername(username: string): Observable<UserSystem> {
+    return this.http.get<UserSystem>(`${this.baseUrl}/${username}`);
+  }
 }

@@ -37,6 +37,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { AuthInterceptorService } from './core/services/auth-interceptor.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { QuantityPatchComponent } from './product/components/product-patch/quantity-patch/quantity-patch.component';
+import { UserUpdateComponent } from './user/user-update/user-update.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { QuantityPatchComponent } from './product/components/product-patch/quant
     ConfirmDialogComponent,
     NavMobileComponent,
     HomeComponent,
-    QuantityPatchComponent
+    QuantityPatchComponent,
+    UserUpdateComponent
   ],
   imports: [
     BrowserModule,
