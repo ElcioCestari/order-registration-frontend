@@ -1,1 +1,26 @@
-<p>user-update works!</p>
+<mat-card>
+  <mat-card-title>Editar Usuário</mat-card-title>
+  <mat-card-content>
+    <form #userForm="ngForm">
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input
+          [ngModel]="user.password"
+          name="password"
+          #password="ngModel"
+          matInput
+          type="password"
+          required
+          placeholder="Password"
+        />
+        <mat-error *ngIf="password.invalid">valor inválido</mat-error>
+      </mat-form-field>
+      <mat-card-actions>
+        <button mat-raised-button routerLink="user/list">cancel</button>
+        <button mat-raised-button [disabled]="userForm.invalid" (click)="save()">
+          salvar
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+</mat-card>

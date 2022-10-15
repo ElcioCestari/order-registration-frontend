@@ -11,7 +11,7 @@ import { UserSystem } from '../../core/model/user-system';
   styleUrls: ['./user-update.component.css']
 })
 export class UserUpdateComponent implements OnInit {
-  private user: UserSystem = {
+  user: UserSystem = {
     username: '',
     password: '',
     authorities: ['']
@@ -36,5 +36,9 @@ export class UserUpdateComponent implements OnInit {
           this.snackBar.show(`usuário ${username} não encontrado`, false);
         }
       });
+  }
+
+  save() {
+
   }
 }
