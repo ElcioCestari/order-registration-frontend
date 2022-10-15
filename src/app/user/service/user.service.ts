@@ -38,13 +38,11 @@ export class UserService {
   }
 
   delete(userSystem: UserSystem): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/${userSystem.username}`);
+    return this.http.delete<any>(`${this.baseUrl}/${userSystem.id}`);
   }
 
-  update(userSystem: UserSystem): Observable<UserSystem> {
-    return this.http.delete<UserSystem>(
-      `${this.baseUrl}/${userSystem.username}`
-    );
+  update(userSystem: UserSystem): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/${userSystem.id}`, userSystem);
   }
 
   readByUsername(username: string): Observable<UserSystem> {

@@ -84,7 +84,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
       .subscribe({
         next: () => {
           this.snackBar.show('usuário deletado');
-          this.router.navigate(['user/list']);
+          this.load();
         },
         error: err => {
           console.error(err);
