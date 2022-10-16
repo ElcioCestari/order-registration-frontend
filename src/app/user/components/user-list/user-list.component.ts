@@ -48,7 +48,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
   }
 
   edit(userSystem: UserSystem) {
-    this.router.navigate([`/user/update/${userSystem.username}`]);
+    this.router.navigate([`/user/update/${userSystem.id}`]);
   }
 
   newProduct() {

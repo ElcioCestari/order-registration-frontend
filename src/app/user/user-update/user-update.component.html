@@ -5,7 +5,7 @@
       <mat-form-field>
         <mat-label>Password</mat-label>
         <input
-          [ngModel]="user.password"
+          [(ngModel)]="user.password"
           name="password"
           #password="ngModel"
           matInput
@@ -16,7 +16,7 @@
         <mat-error *ngIf="password.invalid">valor inválido</mat-error>
       </mat-form-field>
       <mat-card-actions>
-        <button mat-raised-button routerLink="user/list">cancel</button>
+        <button mat-raised-button (click)="cancel()">cancel</button>
         <button mat-raised-button [disabled]="userForm.invalid" (click)="save()">
           salvar
         </button>

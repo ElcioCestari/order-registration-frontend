@@ -3,6 +3,7 @@ import { UserSystem } from '../../core/model/user-system';
 import { map, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { UserSystemUpdateDto } from '../user-update/user-system-update.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +42,7 @@ export class UserService {
     return this.http.delete<any>(`${this.baseUrl}/${userSystem.id}`);
   }
 
-  update(userSystem: UserSystem): Observable<any> {
+  update(userSystem: UserSystemUpdateDto): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}/${userSystem.id}`, userSystem);
   }
 
