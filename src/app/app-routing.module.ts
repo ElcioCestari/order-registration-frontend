@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'products',
-    canActivateChild: [UserRoleGuard],
+    // canActivateChild: [UserRoleGuard],
     children: [
       { path: 'list', component: ProductListComponent },
       { path: 'create', component: ProductCreateComponent },
