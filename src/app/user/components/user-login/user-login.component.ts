@@ -33,7 +33,8 @@ export class UserLoginComponent implements OnInit {
           this.snackBar.show('sucesso!');
           this.router.navigate(['/']);
         },
-        error: () => {
+        error: (err) => {
+          console.error(err)
           this.snackBar.show('algo deu errado.', false);
         }
       });

@@ -4,6 +4,7 @@ import { map, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { UserSystemUpdateDto } from '../user-update/user-system-update.dto';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,10 @@ import { UserSystemUpdateDto } from '../user-update/user-system-update.dto';
 export class UserService {
   private readonly baseUrl = `${environment.apiUrl}/users`;
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly router: Router
+  ) {}
 
   login(user: UserSystem): Observable<UserSystem> {
     const basicAuth = `Basic ${btoa(user.username + ':' + user.password)}`;
@@ -28,6 +32,13 @@ export class UserService {
           return result;
         })
       );
+  }
+
+  logout() {
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('authorities');
+    sessionStorage.removeItem('auth');
+    this.router.navigate(['/']);
   }
 
   save(user: UserSystem): Observable<UserSystem> {

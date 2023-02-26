@@ -11,13 +11,21 @@
     <em class="material-icons md-36"> account_circle</em>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="user/create">
-      <em class="material-icons md-24">person_add</em>
-      <span>criar</span>
+    <div *ngIf="isLogged; else notLogged">
+      <button mat-menu-item routerLink="user/create">
+        <em class="material-icons md-24">person_add</em>
+        <span>criar</span>
+      </button>
+      <button mat-menu-item routerLink="user/sign" color="primary">
+        <em class="material-icons md-24">login</em>
+        <span>login</span>
+      </button>
+    </div>
+    <ng-template #notLogged>
+      <button mat-menu-item (click)="logout()">
+      <em class="material-icons md-24">logout</em>
+      <span>sair</span>
     </button>
-    <button mat-menu-item routerLink="user/sign" color="primary">
-      <em class="material-icons md-24">login</em>
-      <span>login</span>
-    </button>
+    </ng-template>
   </mat-menu>
 </mat-toolbar>
