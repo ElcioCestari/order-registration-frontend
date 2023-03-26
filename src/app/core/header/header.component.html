@@ -11,7 +11,7 @@
     <em class="material-icons md-36"> account_circle</em>
   </button>
   <mat-menu #menu="matMenu">
-    <div *ngIf="isLogged; else notLogged">
+    <div *ngIf="!isLogged; else notLogged">
       <button mat-menu-item routerLink="user/create">
         <em class="material-icons md-24">person_add</em>
         <span>criar</span>
