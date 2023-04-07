@@ -9,16 +9,13 @@ import {SectionComponent} from './section/section.component';
 import {FooterComponent} from './core/footer/footer.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
-import {UserCreateComponent} from './user/components/user-create/user-create.component';
-import {UserLoginComponent} from './user/components/user-login/user-login.component';
-import {UserListComponent} from './user/components/user-list/user-list.component';
 import {ConfirmDialogComponent} from './core/components/confirm-dialog/confirm-dialog.component';
 import {NavMobileComponent} from './core/nav/nav-mobile/nav-mobile.component';
 import {HomeComponent} from './home/home.component';
 import {AuthInterceptorService} from './core/services/auth-interceptor.service';
-import {UserUpdateComponent} from './user/user-update/user-update.component';
 import {MaterialModule} from "./material/material.module";
 import {ProductModule} from "./product/product.module";
+import {UserModule} from "./user/user.module";
 
 @NgModule({
   declarations: [
@@ -27,13 +24,9 @@ import {ProductModule} from "./product/product.module";
     NavComponent,
     SectionComponent,
     FooterComponent,
-    UserCreateComponent,
-    UserLoginComponent,
-    UserListComponent,
     ConfirmDialogComponent,
     NavMobileComponent,
-    HomeComponent,
-    UserUpdateComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +35,8 @@ import {ProductModule} from "./product/product.module";
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    ProductModule
+    ProductModule,
+    UserModule
   ],
   providers: [
     {
