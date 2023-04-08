@@ -4,7 +4,7 @@ import {ProductUpdateComponent} from "./components/product-update/product-update
 import {QuantityPatchComponent} from "./components/product-patch/quantity-patch/quantity-patch.component";
 import {CommonModule} from "@angular/common";
 import {MaterialModule} from "../material/material.module";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ProductCreateComponent} from "./components/product-create/product-create.component";
 
 
@@ -18,7 +18,8 @@ import {ProductCreateComponent} from "./components/product-create/product-create
   imports: [
     CommonModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class ProductModule {

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { take } from 'rxjs';
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-product-create',
@@ -23,10 +24,22 @@ export class ProductCreateComponent implements OnInit {
     haveInStock: false
   };
 
+  formGroup = this.fb.group({
+    name: [''],
+    description: [''],
+    unitPurchasePrice: [0],
+    unitPurchaseSale: [0],
+    category: [Category.NOT_DEFINED],
+    stock: [{quantity: 0 }],
+    registrationTime: [new Date(1970, 12, 31)],
+    haveInStock: [false]
+
+  })
   constructor(
     private readonly router: Router,
     private readonly service: ProductService,
-    private readonly snackBar: SnackbarService
+    private readonly snackBar: SnackbarService,
+    private readonly fb: FormBuilder
   ) {}
 
   ngOnInit(): void {}
@@ -48,4 +61,9 @@ export class ProductCreateComponent implements OnInit {
         error: () => this.snackBar.show(`Algo deu errado!`)
       });
   }
+  onSubmit() {
+    // TODO: Use EventEmitter with form value
+    console.warn(this.formGroup.value);
+  }
+
 }
