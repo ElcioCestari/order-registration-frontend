@@ -13,19 +13,9 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, 
   styleUrls: ['./product-create.component.css']
 })
 export class ProductCreateComponent implements OnInit {
-  product: Product = {
-    name: '',
-    description: '',
-    unitPurchasePrice: 0,
-    unitPurchaseSale: 0,
-    category: Category.NOT_DEFINED,
-    stock: { quantity: 0 },
-    registrationTime: new Date(1970, 12, 31),
-    haveInStock: false
-  };
 
   formGroup = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(10)]],
+    name: ['', [Validators.required, Validators.minLength(3)]],
     description: ['', Validators.required],
     unitPurchasePrice: [0, Validators.required],
     unitPurchaseSale: [0, Validators.required],
@@ -33,16 +23,16 @@ export class ProductCreateComponent implements OnInit {
     stock: [{quantity: 0 }],
     registrationTime: [new Date(1970, 12, 31)],
     haveInStock: [false]
-
   })
+
+  ngOnInit(): void {}
+
   constructor(
     private readonly router: Router,
     private readonly service: ProductService,
     private readonly snackBar: SnackbarService,
     private readonly fb: FormBuilder
   ) {}
-
-  ngOnInit(): void {}
 
   cancel(): void {
     this.snackBar.show(`Operação cancelada`);
@@ -51,7 +41,7 @@ export class ProductCreateComponent implements OnInit {
 
   onSubmit() {
     this.service
-      .save(this.product)
+      .save(this.formGroup.value)
       .pipe(take(1))
       .subscribe({
         next: () => {

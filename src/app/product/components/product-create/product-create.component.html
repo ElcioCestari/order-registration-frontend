@@ -1,16 +1,13 @@
 <mat-card class="mat-elevation-z7">
   <mat-card-title>Crie um novo Produto</mat-card-title>
   <mat-card-content>
-    <form
-      #productForm="ngForm"
-      [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
       <mat-form-field>
         <mat-label>Nome</mat-label>
         <input
           name="name"
           required
           matInput
-          [(ngModel)]="product.name"
           formControlName="name"
           placeholder="Produto"
         />
@@ -21,7 +18,6 @@
         <textarea
           matInput
           name="description"
-          [(ngModel)]="product.description"
           placeholder="Digite a descrição do produto"
           formControlName="description"
           required
@@ -34,7 +30,6 @@
         <mat-label>Preço de compra</mat-label>
         <input
           matInput
-          [(ngModel)]="product.unitPurchasePrice"
           name="unitPurchasePrice"
           formControlName="unitPurchasePrice"
           placeholder="Preço de compra R$"
@@ -47,7 +42,6 @@
         <mat-label>Preço de venda</mat-label>
         <input
           matInput
-          [(ngModel)]="product.unitPurchaseSale"
           placeholder="Preço de venda R$"
           name="unitPurchaseSale"
           formControlName="unitPurchaseSale"
