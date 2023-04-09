@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { take } from 'rxjs';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-product-create',
@@ -25,10 +25,10 @@ export class ProductCreateComponent implements OnInit {
   };
 
   formGroup = this.fb.group({
-    name: [''],
-    description: [''],
-    unitPurchasePrice: [0],
-    unitPurchaseSale: [0],
+    name: ['', [Validators.required, Validators.minLength(10)]],
+    description: ['', Validators.required],
+    unitPurchasePrice: [0, Validators.required],
+    unitPurchaseSale: [0, Validators.required],
     category: [Category.NOT_DEFINED],
     stock: [{quantity: 0 }],
     registrationTime: [new Date(1970, 12, 31)],
@@ -49,7 +49,7 @@ export class ProductCreateComponent implements OnInit {
     this.router.navigate(['/products/list']);
   }
 
-  save(): void {
+  onSubmit() {
     this.service
       .save(this.product)
       .pipe(take(1))
@@ -58,12 +58,17 @@ export class ProductCreateComponent implements OnInit {
           this.snackBar.show(`Produto salvo!`);
           this.router.navigate(['/products/list']);
         },
-        error: () => this.snackBar.show(`Algo deu errado!`)
+        error: () => this.snackBar.show(`Algo deu errado. Verifique os campos e tente novamente.`, false)
       });
   }
-  onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.formGroup.value);
-  }
 
+  getErrorMessage(control: AbstractControl | null): string | null {
+    if (control?.hasError('required')) {
+      return 'Campo obrigatório'
+    }
+    if(control?.hasError('minLength') || control?.hasError('minLength')) {
+      return 'Tamanho inválido'
+    }
+    return null;
+  }
 }

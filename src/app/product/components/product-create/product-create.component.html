@@ -1,37 +1,34 @@
 <mat-card class="mat-elevation-z7">
   <mat-card-title>Crie um novo Produto</mat-card-title>
   <mat-card-content>
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-      <label for="name">Name: </label>
-      <input id="name" type="text" formControlName="name">
-      <button type="submit">SAVE</button>
-    </form>
-  </mat-card-content>
-  <mat-card-content>
-    <form #productForm="ngForm">
+    <form
+      #productForm="ngForm"
+      [formGroup]="formGroup" (ngSubmit)="onSubmit()">
       <mat-form-field>
         <mat-label>Nome</mat-label>
         <input
           name="name"
-          #name="ngModel"
           required
           matInput
           [(ngModel)]="product.name"
+          formControlName="name"
           placeholder="Produto"
         />
-        <mat-error *ngIf="name.invalid">campo obrigatório</mat-error>
+        <mat-error *ngIf="formGroup.get('name')?.invalid">{{getErrorMessage(formGroup.get('name'))}}</mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Descrição</mat-label>
         <textarea
           matInput
           name="description"
-          #description="ngModel"
           [(ngModel)]="product.description"
           placeholder="Digite a descrição do produto"
+          formControlName="description"
           required
         ></textarea>
-        <mat-error *ngIf="description.invalid"></mat-error>
+        <mat-error *ngIf="formGroup.get('description')?.invalid">
+          {{getErrorMessage(formGroup.get('description'))}}
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Preço de compra</mat-label>
@@ -39,10 +36,12 @@
           matInput
           [(ngModel)]="product.unitPurchasePrice"
           name="unitPurchasePrice"
-          #unitPurchasePrice="ngModel"
+          formControlName="unitPurchasePrice"
           placeholder="Preço de compra R$"
         />
-        <mat-error *ngIf="unitPurchasePrice.invalid">campo invalido</mat-error>
+        <mat-error *ngIf="formGroup.get('unitPurchasePrice')?.invalid">
+          {{getErrorMessage(formGroup.get('unitPurchasePrice'))}}
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Preço de venda</mat-label>
@@ -51,18 +50,20 @@
           [(ngModel)]="product.unitPurchaseSale"
           placeholder="Preço de venda R$"
           name="unitPurchaseSale"
-          #unitPurchaseSale="ngModel"
+          formControlName="unitPurchaseSale"
           required
         />
-        <mat-error *ngIf="unitPurchaseSale.invalid">campo invalido</mat-error>
+        <mat-error *ngIf="formGroup.get('unitPurchaseSale')?.invalid">
+          {{getErrorMessage(formGroup.get('unitPurchaseSale'))}}
+        </mat-error>
       </mat-form-field>
       <mat-card-actions>
         <button mat-raised-button (click)="cancel()">cancelar</button>
         <button
           mat-raised-button
           color="primary"
-          [disabled]="productForm.invalid"
-          (click)="save()"
+          [disabled]="formGroup.invalid"
+          type="submit"
         >
           salvar
         </button>
