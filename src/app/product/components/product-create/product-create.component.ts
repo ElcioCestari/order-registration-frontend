@@ -5,8 +5,8 @@ import {SnackbarService} from '../../../core/services/snackbar.service';
 import {take} from 'rxjs';
 import {FormBuilder, Validators} from "@angular/forms";
 import ErrorMsgService from "../../services/error-msg-service";
-import BaseFormComponent from "./base-form.component";
 import {Category} from "../../../core/model/category";
+import BaseFormComponent from "../../../core/components/base-form.component";
 
 
 @Component({
