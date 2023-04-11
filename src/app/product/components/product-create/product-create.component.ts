@@ -4,7 +4,7 @@ import {ProductService} from '../../services/product.service';
 import {SnackbarService} from '../../../core/services/snackbar.service';
 import {take} from 'rxjs';
 import {FormBuilder, Validators} from "@angular/forms";
-import ErrorMsgService from "../../services/error-msg-service";
+import ErrorMsgService from "../../../core/services/error-msg-service";
 import {Category} from "../../../core/model/category";
 import BaseFormComponent from "../../../core/components/base-form.component";
 
