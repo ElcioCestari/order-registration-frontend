@@ -5,6 +5,8 @@ import {ProductService} from '../../services/product.service';
 import {SnackbarService} from '../../../core/services/snackbar.service';
 import {take} from 'rxjs';
 import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
+import ErrorMsgService from "../../services/error-msg-service";
+
 
 @Component({
   selector: 'app-product-create',
@@ -15,7 +17,7 @@ export class ProductCreateComponent implements OnInit {
 
   formGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
-    description: ['', Validators.required],
+    description: ['', [Validators.required, Validators.minLength(3)]],
     unitPurchasePrice: [0, [Validators.required, Validators.min(1)]],
     unitPurchaseSale: [0, [Validators.required, Validators.min(1)]],
     category: [Category.NOT_DEFINED],
@@ -31,7 +33,8 @@ export class ProductCreateComponent implements OnInit {
     private readonly router: Router,
     private readonly service: ProductService,
     private readonly snackBar: SnackbarService,
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private readonly errorMsgService: ErrorMsgService
   ) {
   }
 
@@ -54,22 +57,10 @@ export class ProductCreateComponent implements OnInit {
   }
 
   getErrorMessage(control: AbstractControl | null): string | null {
-    if (control?.errors?.['required']) {
-      return 'Campo obrigatório'
-    }
-    if (control?.errors?.['minlength']) {
-      return 'Tamanho inválido'
-    }
-    if (control?.errors?.['min']) {
-      return 'Valor minimo inválido'
-    }
-    if (control?.errors?.['max']) {
-      return 'Valor máximo inválido'
-    }
-    return null;
+    return this.errorMsgService.getErrorMessage(control)
   }
 
   onBlurFormControl(formControlName: string) {
-    this.formGroup.get(formControlName)?.markAsTouched();
+    this.errorMsgService.onBlurFormControl(formControlName, this.formGroup)
   }
 }
