@@ -10,8 +10,11 @@
           matInput
           formControlName="name"
           placeholder="Produto"
+          (blur)="onBlurFormControl('name')"
         />
-        <mat-error *ngIf="formGroup.get('name')?.invalid">{{getErrorMessage(formGroup.get('name'))}}</mat-error>
+        <mat-error *ngIf="formGroup.get('name')?.invalid && formGroup.get('name')?.touched">
+          {{getErrorMessage(formGroup.get('name'))}}
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Descrição</mat-label>
@@ -21,6 +24,7 @@
           placeholder="Digite a descrição do produto"
           formControlName="description"
           required
+          (blur)="onBlurFormControl('description')"
         ></textarea>
         <mat-error *ngIf="formGroup.get('description')?.invalid">
           {{getErrorMessage(formGroup.get('description'))}}
@@ -33,6 +37,7 @@
           name="unitPurchasePrice"
           formControlName="unitPurchasePrice"
           placeholder="Preço de compra R$"
+          (blur)="onBlurFormControl('unitPurchasePrice')"
         />
         <mat-error *ngIf="formGroup.get('unitPurchasePrice')?.invalid">
           {{getErrorMessage(formGroup.get('unitPurchasePrice'))}}
@@ -46,6 +51,7 @@
           name="unitPurchaseSale"
           formControlName="unitPurchaseSale"
           required
+          (blur)="onBlurFormControl('unitPurchaseSale')"
         />
         <mat-error *ngIf="formGroup.get('unitPurchaseSale')?.invalid">
           {{getErrorMessage(formGroup.get('unitPurchaseSale'))}}
