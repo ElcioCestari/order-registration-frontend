@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Category} from '../../../core/model/category';
 import {Router} from '@angular/router';
 import {ProductService} from '../../services/product.service';
 import {SnackbarService} from '../../../core/services/snackbar.service';
 import {take} from 'rxjs';
-import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import ErrorMsgService from "../../services/error-msg-service";
+import BaseFormComponent from "./base-form.component";
+import {Category} from "../../../core/model/category";
 
 
 @Component({
@@ -13,19 +14,7 @@ import ErrorMsgService from "../../services/error-msg-service";
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.css']
 })
-export class ProductCreateComponent implements OnInit {
-
-  formGroup = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(3)]],
-    description: ['', [Validators.required, Validators.minLength(3)]],
-    unitPurchasePrice: [0, [Validators.required, Validators.min(1)]],
-    unitPurchaseSale: [0, [Validators.required, Validators.min(1)]],
-    category: [Category.NOT_DEFINED],
-    stock: [{quantity: 0}],
-    registrationTime: [new Date(1970, 12, 31)],
-    haveInStock: [false]
-  })
-
+export class ProductCreateComponent extends BaseFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
@@ -33,9 +22,23 @@ export class ProductCreateComponent implements OnInit {
     private readonly router: Router,
     private readonly service: ProductService,
     private readonly snackBar: SnackbarService,
-    private readonly fb: FormBuilder,
-    private readonly errorMsgService: ErrorMsgService
+    fb: FormBuilder,
+    errorMsgService: ErrorMsgService
   ) {
+    super(
+      fb,
+      errorMsgService,
+      fb.group({
+        name: ['', [Validators.required, Validators.minLength(3)]],
+        description: ['', [Validators.required, Validators.minLength(3)]],
+        unitPurchasePrice: [0, [Validators.required, Validators.min(1)]],
+        unitPurchaseSale: [0, [Validators.required, Validators.min(1)]],
+        category: [Category.NOT_DEFINED],
+        stock: [{quantity: 0}],
+        registrationTime: [new Date(1970, 12, 31)],
+        haveInStock: [false]
+      })
+    );
   }
 
   cancel(): void {
@@ -56,11 +59,4 @@ export class ProductCreateComponent implements OnInit {
       });
   }
 
-  getErrorMessage(control: AbstractControl | null): string | null {
-    return this.errorMsgService.getErrorMessage(control)
-  }
-
-  onBlurFormControl(formControlName: string) {
-    this.errorMsgService.onBlurFormControl(formControlName, this.formGroup)
-  }
 }
