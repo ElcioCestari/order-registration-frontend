@@ -1,5 +1,5 @@
 import {Component, HostListener} from '@angular/core';
-import {UserService} from '../../user/service/user.service';
+import {UserService} from '../../../user/service/user.service';
 
 @Component({
   selector: 'app-header',
