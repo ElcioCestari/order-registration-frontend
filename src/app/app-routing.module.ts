@@ -4,7 +4,7 @@ import { ProductCreateComponent } from './product/components/product-create/prod
 import { ProductListComponent } from './product/components/product-list/product-list.component';
 import { UserLoginComponent } from './user/components/user-login/user-login.component';
 import { ProductUpdateComponent } from './product/components/product-update/product-update.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './core/components/home/home.component';
 import { UserCreateComponent } from './user/components/user-create/user-create.component';
 import { UserListComponent } from './user/components/user-list/user-list.component';
 import { UserRoleGuard } from './core/guards/user-role.guard';
