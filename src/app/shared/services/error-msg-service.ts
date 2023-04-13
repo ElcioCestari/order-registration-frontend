@@ -1,9 +1,7 @@
 import {AbstractControl, FormGroup} from "@angular/forms";
 import {Injectable} from "@angular/core";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export default class ErrorMsgService {
 
   getErrorMessage(control: AbstractControl | null): string | null {
