@@ -1,5 +1,5 @@
 import {AbstractControl, FormBuilder, FormGroup} from "@angular/forms";
-import ErrorMsgService from "../services/error-msg-service";
+import ErrorMsgService from "../../shared/services/error-msg-service";
 
 export default class BaseFormComponent {
   constructor(

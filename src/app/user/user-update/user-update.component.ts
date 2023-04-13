@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../service/user.service';
 import {take} from 'rxjs';
-import {SnackbarService} from '../../core/services/snackbar.service';
+import {SnackbarService} from '../../shared/services/snackbar.service';
 import {UserSystem} from '../../core/model/user-system';
 import {UserSystemUpdateDto} from "./user-system-update.dto";
 

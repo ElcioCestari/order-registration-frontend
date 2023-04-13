@@ -8,7 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../../core/model/product';
-import { SnackbarService } from '../../../core/services/snackbar.service';
+import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
 import { Choice } from '../../../core/model/choice';

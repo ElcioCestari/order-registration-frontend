@@ -3,8 +3,8 @@ import { Product } from '../../../core/model/product';
 import { Category } from '../../../core/model/category';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
-import { SnackbarService } from '../../../core/services/snackbar.service';
-import { CategoryService } from '../../../core/services/category.service';
+import { SnackbarService } from '../../../shared/services/snackbar.service';
+import { CategoryService } from '../../../shared/services/category.service';
 import { take } from 'rxjs';
 
 @Component({

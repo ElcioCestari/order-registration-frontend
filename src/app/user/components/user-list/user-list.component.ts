@@ -5,7 +5,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
 import { take } from 'rxjs';
-import { SnackbarService } from '../../../core/services/snackbar.service';
+import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
 import { Choice } from '../../../core/model/choice';

@@ -4,7 +4,7 @@ import { Choice } from '../../../../core/model/choice';
 import { Product } from '../../../../core/model/product';
 import { ProductService } from '../../../services/product.service';
 import { Router } from '@angular/router';
-import { SnackbarService } from '../../../../core/services/snackbar.service';
+import { SnackbarService } from '../../../../shared/services/snackbar.service';
 import { take } from 'rxjs';
 
 @Component({

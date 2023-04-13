@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserSystem } from '../../../core/model/user-system';
 import { UserService } from '../../service/user.service';
-import { SnackbarService } from '../../../core/services/snackbar.service';
+import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
 

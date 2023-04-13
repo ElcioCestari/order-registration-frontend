@@ -12,7 +12,7 @@ import {FormsModule} from '@angular/forms';
 import {ConfirmDialogComponent} from './shared/confirm-dialog/confirm-dialog.component';
 import {NavMobileComponent} from './core/components/nav/nav-mobile/nav-mobile.component';
 import {HomeComponent} from './core/components/home/home.component';
-import {AuthInterceptorService} from './core/services/auth-interceptor.service';
+import {AuthInterceptorService} from './shared/services/auth-interceptor.service';
 import {MaterialModule} from "./material/material.module";
 import {ProductModule} from "./product/product.module";
 import {UserModule} from "./user/user.module";
