@@ -10,7 +10,7 @@ import { ProductService } from '../../services/product.service';
 import { Product } from '../../../core/model/product';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../../../core/components/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
 import { Choice } from '../../../core/model/choice';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';

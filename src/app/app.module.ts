@@ -9,7 +9,7 @@ import {SectionComponent} from './core/components/section/section.component';
 import {FooterComponent} from './core/components/footer/footer.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
-import {ConfirmDialogComponent} from './core/components/confirm-dialog/confirm-dialog.component';
+import {ConfirmDialogComponent} from './shared/confirm-dialog/confirm-dialog.component';
 import {NavMobileComponent} from './core/components/nav/nav-mobile/nav-mobile.component';
 import {HomeComponent} from './core/components/home/home.component';
 import {AuthInterceptorService} from './core/services/auth-interceptor.service';
