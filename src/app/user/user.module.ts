@@ -6,6 +6,7 @@ import {FormsModule} from "@angular/forms";
 import {UserUpdateComponent} from "./user-update/user-update.component";
 import {UserLoginComponent} from "./components/user-login/user-login.component";
 import {UserListComponent} from "./components/user-list/user-list.component";
+import {SharedModule} from "../shared/shared.module";
 
 
 
@@ -19,7 +20,8 @@ import {UserListComponent} from "./components/user-list/user-list.component";
   imports: [
     CommonModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class UserModule { }
