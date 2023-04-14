@@ -10,20 +10,14 @@
         [formControl]="getFormControl('name')"
         [formGroup]="formGroup"
       ></app-input>
-      <mat-form-field>
-        <mat-label>Descrição</mat-label>
-        <textarea
-          matInput
-          name="description"
-          placeholder="Digite a descrição do produto"
-          formControlName="description"
-          required
-          (blur)="onBlurFormControl('description')"
-        ></textarea>
-        <mat-error *ngIf="formGroup.get('description')?.invalid">
-          {{getErrorMessage(formGroup.get('description'))}}
-        </mat-error>
-      </mat-form-field>
+      <app-input-text-area
+        [fieldName]="'description'"
+        [formControlName]="'description'"
+        [placeHolder]="'Descrição'"
+        [label]="'Descrição'"
+        [formControl]="getFormControl('description')"
+        [formGroup]="formGroup"
+      ></app-input-text-area>
       <app-input
         [fieldName]="'unitPurchasePrice'"
         [formControlName]="'unitPurchasePrice'"

@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {BaseInputComponent} from "./components/base-input.component";
+import { InputTextAreaComponent } from './components/input-text-area/input-text-area.component';
 
 
 
@@ -17,7 +18,8 @@ import {BaseInputComponent} from "./components/base-input.component";
   declarations: [
     ConfirmDialogComponent,
     InputComponent,
-    BaseInputComponent
+    BaseInputComponent,
+    InputTextAreaComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import {BaseInputComponent} from "./components/base-input.component";
     ReactiveFormsModule
   ],
   exports: [
-    InputComponent
+    InputComponent,
+    InputTextAreaComponent
   ],
   providers: [
     SnackbarService,

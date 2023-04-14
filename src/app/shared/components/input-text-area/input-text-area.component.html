@@ -1,0 +1,14 @@
+<mat-form-field [formGroup]="formGroup">
+  <mat-label>{{label}}</mat-label>
+  <textarea
+    name="{{fieldName}}"
+    required
+    matInput
+    formControlName="{{fieldName}}"
+    placeholder="{{placeHolder}}"
+    (blur)="onBlurFormControl('{{fieldName}}')"
+  ></textarea>
+  <mat-error *ngIf="getFormControl()?.invalid && getFormControl()?.touched">
+    {{getErrorMessage(getFormControl())}}
+  </mat-error>
+</mat-form-field>
