@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {ProductService} from '../../services/product.service';
 import {SnackbarService} from '../../../shared/services/snackbar.service';
 import {take} from 'rxjs';
-import {FormBuilder, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import ErrorMsgService from "../../../shared/services/error-msg-service";
 import {Category} from "../../../core/model/category";
 import BaseFormComponent from "../../../core/components/base-form.component";
@@ -59,4 +59,7 @@ export class ProductCreateComponent extends BaseFormComponent implements OnInit 
       });
   }
 
+  getFormControl(name: string): FormControl {
+    return <FormControl>this.formGroup.get(name);
+  }
 }

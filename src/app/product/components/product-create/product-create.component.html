@@ -2,6 +2,14 @@
   <mat-card-title>Crie um novo Produto</mat-card-title>
   <mat-card-content>
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <app-input
+        [fieldName]="'name'"
+        [formControlName]="'name'"
+        [placeHolder]="'Nome do produto'"
+        [label]="'Nome do produto'"
+        [formControl]="getFormControl('name')"
+        [formGroup]="formGroup"
+      ></app-input>
       <mat-form-field>
         <mat-label>Nome</mat-label>
         <input
