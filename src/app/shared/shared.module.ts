@@ -9,13 +9,15 @@ import { InputComponent } from './components/input/input.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import {BaseInputComponent} from "./components/base-input.component";
 
 
 
 @NgModule({
   declarations: [
     ConfirmDialogComponent,
-    InputComponent
+    InputComponent,
+    BaseInputComponent
   ],
   imports: [
     CommonModule,
