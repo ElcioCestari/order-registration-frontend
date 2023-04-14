@@ -11,20 +11,6 @@
         [formGroup]="formGroup"
       ></app-input>
       <mat-form-field>
-        <mat-label>Nome</mat-label>
-        <input
-          name="name"
-          required
-          matInput
-          formControlName="name"
-          placeholder="Produto"
-          (blur)="onBlurFormControl('name')"
-        />
-        <mat-error *ngIf="formGroup.get('name')?.invalid && formGroup.get('name')?.touched">
-          {{getErrorMessage(formGroup.get('name'))}}
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field>
         <mat-label>Descrição</mat-label>
         <textarea
           matInput
