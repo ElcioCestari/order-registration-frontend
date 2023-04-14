@@ -32,21 +32,14 @@
         [formControl]="getFormControl('unitPurchasePrice')"
         [formGroup]="formGroup"
       ></app-input>
-
-      <mat-form-field>
-        <mat-label>Preço de venda</mat-label>
-        <input
-          matInput
-          placeholder="Preço de venda R$"
-          name="unitPurchaseSale"
-          formControlName="unitPurchaseSale"
-          required
-          (blur)="onBlurFormControl('unitPurchaseSale')"
-        />
-        <mat-error *ngIf="formGroup.get('unitPurchaseSale')?.invalid">
-          {{getErrorMessage(formGroup.get('unitPurchaseSale'))}}
-        </mat-error>
-      </mat-form-field>
+      <app-input
+        [fieldName]="'unitPurchaseSale'"
+        [formControlName]="'unitPurchaseSale'"
+        [placeHolder]="'R$ 0,00'"
+        [label]="'Preço de venda'"
+        [formControl]="getFormControl('unitPurchaseSale')"
+        [formGroup]="formGroup"
+      ></app-input>
       <mat-card-actions>
         <button mat-raised-button (click)="cancel()">cancelar</button>
         <button
