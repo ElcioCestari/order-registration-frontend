@@ -11,15 +11,10 @@ export class BaseInputComponent {
   @Input() fieldName: string = '';
   @Input() placeHolder: string = '';
   @Input() formGroup: FormGroup = this.fb.group({});
-  @Input() formControl: AbstractControl = new FormControl();
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly errorMsgService: ErrorMsgService) {
-  }
-
-  getFormControl(): AbstractControl | null {
-    return this.formControl
   }
 
   getErrorMessage(control: AbstractControl | null): string | null {

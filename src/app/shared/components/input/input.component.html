@@ -1,14 +1,14 @@
 <mat-form-field [formGroup]="formGroup">
   <mat-label>{{label}}</mat-label>
   <input
-    name="{{fieldName}}"
+    [name]="fieldName"
     required
     matInput
-    formControlName="{{fieldName}}"
-    placeholder="{{placeHolder}}"
-    (blur)="onBlurFormControl('{{fieldName}}')"
+    [formControlName]="fieldName"
+    [placeholder]="placeHolder"
+    (blur)="onBlurFormControl(fieldName)"
   />
-  <mat-error *ngIf="getFormControl()?.invalid && getFormControl()?.touched">
-    {{getErrorMessage(getFormControl())}}
+  <mat-error *ngIf="formGroup?.get(fieldName)?.invalid && formGroup?.get(fieldName)?.touched">
+    {{getErrorMessage(formGroup.get(fieldName))}}
   </mat-error>
 </mat-form-field>

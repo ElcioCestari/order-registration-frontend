@@ -4,34 +4,26 @@
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
       <app-input
         [fieldName]="'name'"
-        [formControlName]="'name'"
         [placeHolder]="'Nome do produto'"
         [label]="'Nome do produto'"
-        [formControl]="getFormControl('name')"
         [formGroup]="formGroup"
       ></app-input>
       <app-input-text-area
         [fieldName]="'description'"
-        [formControlName]="'description'"
         [placeHolder]="'Descrição'"
         [label]="'Descrição'"
-        [formControl]="getFormControl('description')"
         [formGroup]="formGroup"
       ></app-input-text-area>
       <app-input
         [fieldName]="'unitPurchasePrice'"
-        [formControlName]="'unitPurchasePrice'"
         [placeHolder]="'R$ 0,00'"
         [label]="'Preço de compra'"
-        [formControl]="getFormControl('unitPurchasePrice')"
         [formGroup]="formGroup"
       ></app-input>
       <app-input
         [fieldName]="'unitPurchaseSale'"
-        [formControlName]="'unitPurchaseSale'"
         [placeHolder]="'R$ 0,00'"
         [label]="'Preço de venda'"
-        [formControl]="getFormControl('unitPurchaseSale')"
         [formGroup]="formGroup"
       ></app-input>
       <mat-card-actions>
