@@ -14,6 +14,7 @@ import ErrorMsgService from "../../../shared/services/error-msg-service";
   styleUrls: ['./product-update.component.css']
 })
 export class ProductUpdateComponent implements OnInit {
+  private readonly id: string | null = this.activeRoute.snapshot.paramMap.get('id');
   categories: string[] = this.categoryService.getValues();
 
   constructor(
@@ -28,27 +29,26 @@ export class ProductUpdateComponent implements OnInit {
   }
 
   formGroup = this.fb.group({
-    id: [{value: this.activeRoute.snapshot.paramMap.get('id'), disabled: true}],
-    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+    id: [{value: this.id, disabled: true}],
     haveInStock: [false, [Validators.required]],
-    quantity: [0, [Validators.required, Validators.min(0)]],
     registrationTime: [new Date(), [Validators.required]],
     category: [Category.NOT_DEFINED, [Validators.required]],
-    description: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+    quantity: [0, [Validators.required, Validators.min(0)]],
     unitPurchaseSale: [0, [Validators.required, Validators.min(1)]],
     unitPurchasePrice: [0, [Validators.required, Validators.min(1)]],
+    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+    description: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
   })
 
   selectedCategory: Category = Category.NOT_DEFINED;
 
   ngOnInit(): void {
-    const id = this.activeRoute.snapshot.paramMap.get('id');
     this.service
-      .readById(id!)
+      .readById(this.id!)
       .pipe(take(1))
       .subscribe({
         next: product => (this.formGroup = this.service.buildForm(product, this.formGroup)),
-        error: () => this.snackBar.show(`Produto com id ${id} não encontrado`, false)
+        error: () => this.snackBar.show(`Produto com id ${this.id} não encontrado`, false)
       });
   }
 
