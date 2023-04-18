@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from '../../../core/model/product';
-import { Category } from '../../../core/model/category';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../../services/product.service';
-import { SnackbarService } from '../../../shared/services/snackbar.service';
-import { CategoryService } from '../../../shared/services/category.service';
-import { take } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Category} from '../../../core/model/category';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ProductService} from '../../services/product.service';
+import {SnackbarService} from '../../../shared/services/snackbar.service';
+import {CategoryService} from '../../../shared/services/category.service';
+import {take} from 'rxjs';
+import {FormBuilder, Validators} from "@angular/forms";
+import ErrorMsgService from "../../../shared/services/error-msg-service";
 
 @Component({
   selector: 'app-product-update',
@@ -14,25 +15,31 @@ import { take } from 'rxjs';
 })
 export class ProductUpdateComponent implements OnInit {
   categories: string[] = this.categoryService.getValues();
-  product: Product = {
-    name: '',
-    haveInStock: false,
-    registrationTime: new Date(),
-    category: Category.NOT_DEFINED,
-    stock: { quantity: 0 },
-    description: '',
-    unitPurchaseSale: 0,
-    unitPurchasePrice: 0
-  };
-  selectedCategory: Category = Category.NOT_DEFINED;
 
   constructor(
     private readonly router: Router,
+    private readonly fb: FormBuilder,
     private readonly service: ProductService,
     private readonly snackBar: SnackbarService,
     private readonly activeRoute: ActivatedRoute,
-    private readonly categoryService: CategoryService
-  ) {}
+    private readonly categoryService: CategoryService,
+    private readonly errorMsgService: ErrorMsgService,
+  ) {
+  }
+
+  formGroup = this.fb.group({
+    id: [{value: this.activeRoute.snapshot.paramMap.get('id'), disabled: true}],
+    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+    haveInStock: [false, [Validators.required]],
+    quantity: [0, [Validators.required, Validators.min(0)]],
+    registrationTime: [new Date(), [Validators.required]],
+    category: [Category.NOT_DEFINED, [Validators.required]],
+    description: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+    unitPurchaseSale: [0, [Validators.required, Validators.min(1)]],
+    unitPurchasePrice: [0, [Validators.required, Validators.min(1)]],
+  })
+
+  selectedCategory: Category = Category.NOT_DEFINED;
 
   ngOnInit(): void {
     const id = this.activeRoute.snapshot.paramMap.get('id');
@@ -40,8 +47,8 @@ export class ProductUpdateComponent implements OnInit {
       .readById(id!)
       .pipe(take(1))
       .subscribe({
-        next: produt => (this.product = produt),
-        error: () => this.snackBar.show(`Produto com id ${id} não encontrado`)
+        next: product => (this.formGroup = this.service.buildForm(product, this.formGroup)),
+        error: () => this.snackBar.show(`Produto com id ${id} não encontrado`, false)
       });
   }
 
@@ -52,11 +59,11 @@ export class ProductUpdateComponent implements OnInit {
   }
 
   update(): void {
-    this.product.category = this.categoryService.getByValue(
-      this.selectedCategory
-    );
+
+    const product = this.service.buildProduct(this.formGroup);
+    console.warn(product)
     this.service
-      .update(this.product)
+      .update(product)
       .pipe(take(1))
       .subscribe({
         next: () => {
@@ -65,5 +72,9 @@ export class ProductUpdateComponent implements OnInit {
         },
         error: () => this.snackBar.show('Erro ao atualizar produto')
       });
+  }
+
+  getErrorMsg(name: string) {
+    return this.errorMsgService.getErrorMessage(this.formGroup.get(name))
   }
 }
