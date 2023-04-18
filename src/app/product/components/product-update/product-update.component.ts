@@ -40,8 +40,6 @@ export class ProductUpdateComponent implements OnInit {
     description: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
   })
 
-  selectedCategory: Category = Category.NOT_DEFINED;
-
   ngOnInit(): void {
     this.service
       .readById(this.id!)
@@ -59,11 +57,8 @@ export class ProductUpdateComponent implements OnInit {
   }
 
   update(): void {
-
-    const product = this.service.buildProduct(this.formGroup);
-    console.warn(product)
     this.service
-      .update(product)
+      .update(this.service.buildProduct(this.formGroup))
       .pipe(take(1))
       .subscribe({
         next: () => {
