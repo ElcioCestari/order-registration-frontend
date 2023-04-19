@@ -53,7 +53,7 @@ export class ProductUpdateComponent implements OnInit {
   cancel(): void {
     this.router
       .navigate(['/products/list'])
-      .then(() => this.snackBar.show('Operação Cancelada!'));
+      .then(() => this.snackBar.show('Operação Cancelada!', false));
   }
 
   update(): void {
@@ -65,7 +65,7 @@ export class ProductUpdateComponent implements OnInit {
           this.snackBar.show('Produto salvo!');
           this.router.navigate(['/products/list']);
         },
-        error: () => this.snackBar.show('Erro ao atualizar produto')
+        error: () => this.snackBar.show('Erro ao atualizar produto', false)
       });
   }
 
