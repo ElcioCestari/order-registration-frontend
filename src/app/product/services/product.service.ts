@@ -6,9 +6,7 @@ import {environment} from '../../../environments/environment';
 import {FormGroup} from "@angular/forms";
 import {ProductMapper} from "../mappers/product.mapper";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ProductService {
   private baseUrl = `${environment.apiUrl}/products`;
 

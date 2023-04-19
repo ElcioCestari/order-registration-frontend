@@ -8,6 +8,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ProductCreateComponent} from "./components/product-create/product-create.component";
 import {SharedModule} from "../shared/shared.module";
 import {ProductMapper} from "./mappers/product.mapper";
+import {ProductService} from "./services/product.service";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {ProductMapper} from "./mappers/product.mapper";
     SharedModule
   ],
   providers: [
-    ProductMapper
+    ProductMapper,
+    ProductService
   ]
 })
 export class ProductModule {
