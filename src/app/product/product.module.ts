@@ -7,6 +7,7 @@ import {MaterialModule} from "../material/material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ProductCreateComponent} from "./components/product-create/product-create.component";
 import {SharedModule} from "../shared/shared.module";
+import {ProductMapper} from "./mappers/product.mapper";
 
 
 @NgModule({
@@ -22,6 +23,9 @@ import {SharedModule} from "../shared/shared.module";
     FormsModule,
     ReactiveFormsModule,
     SharedModule
+  ],
+  providers: [
+    ProductMapper
   ]
 })
 export class ProductModule {

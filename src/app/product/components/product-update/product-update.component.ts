@@ -45,7 +45,7 @@ export class ProductUpdateComponent implements OnInit {
       .readById(this.id!)
       .pipe(take(1))
       .subscribe({
-        next: product => (this.formGroup = this.service.buildForm(product, this.formGroup)),
+        next: product => (this.service.mergeProductInForm(product, this.formGroup)),
         error: () => this.snackBar.show(`Produto com id ${this.id} não encontrado`, false)
       });
   }
