@@ -43,10 +43,9 @@
           placeholder="0,00"
           required
         />
-        <!--        <mat-hint align="end"-->
-        <!--        >valor deve ser maior que-->
-        <!--          {{ purchasePrice.value | currency: 'BRL' }}</mat-hint-->
-        <!--        >-->
+        <mat-hint align="end">
+          valor deve ser maior que {{ formGroup.get('unitPurchasePrice')?.value ?? 0 | currency: 'BRL' }}
+        </mat-hint>
         <mat-error *ngIf="formGroup.get('unitPurchaseSale')?.invalid">{{getErrorMsg('unitPurchaseSale')}}</mat-error>
       </mat-form-field>
       <mat-form-field>

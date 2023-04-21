@@ -5,7 +5,7 @@ import {ProductService} from '../../services/product.service';
 import {SnackbarService} from '../../../shared/services/snackbar.service';
 import {CategoryService} from '../../../shared/services/category.service';
 import {take} from 'rxjs';
-import {FormBuilder, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import ErrorMsgService from "../../../shared/services/error-msg-service";
 
 @Component({
@@ -16,6 +16,7 @@ import ErrorMsgService from "../../../shared/services/error-msg-service";
 export class ProductUpdateComponent implements OnInit {
   private readonly id: string | null = this.activeRoute.snapshot.paramMap.get('id');
   categories: string[] = this.categoryService.getValues();
+  formGroup;
 
   constructor(
     private readonly router: Router,
@@ -26,19 +27,29 @@ export class ProductUpdateComponent implements OnInit {
     private readonly categoryService: CategoryService,
     private readonly errorMsgService: ErrorMsgService,
   ) {
+    this.formGroup = this.fb.group({
+      id: [{value: this.id, disabled: true}],
+      haveInStock: [false, [Validators.required]],
+      registrationTime: [new Date(), [Validators.required]],
+      category: [Category.NOT_DEFINED, [Validators.required]],
+      quantity: [0, [Validators.required, Validators.min(0)]],
+      unitPurchaseSale: [0, [Validators.required, Validators.min(1)]],
+      unitPurchasePrice: [0, [Validators.required, Validators.min(1)]],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      description: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+    })
+    this.formGroup.get('unitPurchaseSale')?.addValidators(this.validUnitPurchaseSale());
   }
 
-  formGroup = this.fb.group({
-    id: [{value: this.id, disabled: true}],
-    haveInStock: [false, [Validators.required]],
-    registrationTime: [new Date(), [Validators.required]],
-    category: [Category.NOT_DEFINED, [Validators.required]],
-    quantity: [0, [Validators.required, Validators.min(0)]],
-    unitPurchaseSale: [0, [Validators.required, Validators.min(1)]],
-    unitPurchasePrice: [0, [Validators.required, Validators.min(1)]],
-    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-    description: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-  })
+  //TODO refactor this function
+  //send rule of the business to the service layer.
+  private validUnitPurchaseSale(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      return control.value < this.formGroup.get('unitPurchasePrice')?.value
+        ? {wrongPrice: 'valor de venda não pode ser menor do que o valor de compra'}
+        : null
+    }
+  }
 
   ngOnInit(): void {
     this.service
@@ -53,7 +64,7 @@ export class ProductUpdateComponent implements OnInit {
   cancel(): void {
     this.router
       .navigate(['/products/list'])
-      .then(() => this.snackBar.show('Operação Cancelada!', false));
+      .then(() => this.snackBar.show('Operação Cancelada!'));
   }
 
   update(): void {

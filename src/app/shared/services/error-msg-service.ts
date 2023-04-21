@@ -17,6 +17,11 @@ export default class ErrorMsgService {
     if (control?.errors?.['max']) {
       return 'Valor máximo inválido'
     }
+    const errors = control?.errors;
+    if (errors) {
+      const key = Object.keys(errors)[0];
+      return control?.errors[key]
+    }
     return null;
   }
 
