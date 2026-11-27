@@ -14,7 +14,7 @@ export class UserCreateComponent implements OnInit {
   user: UserSystem = {
     username: '',
     password: '',
-    authorities: ['USER']
+    authorities: ['CUSTOMER']
   };
   constructor(
     private readonly service: UserService,

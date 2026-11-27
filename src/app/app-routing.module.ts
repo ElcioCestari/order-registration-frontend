@@ -20,7 +20,7 @@ const routes: Routes = [
     path: 'products',
     canActivateChild: [RoleGuard],
     children: [
-      { path: 'list', component: ProductListComponent, data: { roles: [Role.USER, Role.ADMIN] } },
+      { path: 'list', component: ProductListComponent, data: { roles: [Role.CUSTOMER, Role.ADMIN] } },
       { path: 'create', component: ProductCreateComponent, data: { roles: [Role.ADMIN] } },
       { path: 'update/:id', component: ProductUpdateComponent, data: { roles: [Role.ADMIN] } }
     ]
