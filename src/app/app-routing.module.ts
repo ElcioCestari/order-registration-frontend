@@ -7,9 +7,9 @@ import { ProductUpdateComponent } from './product/components/product-update/prod
 import { HomeComponent } from './home/home.component';
 import { UserCreateComponent } from './user/components/user-create/user-create.component';
 import { UserListComponent } from './user/components/user-list/user-list.component';
-import { UserRoleGuard } from './core/guards/user-role.guard';
-import { AdminRoleGuard } from './core/guards/admin-role.guard';
-import {UserUpdateComponent} from "./user/user-update/user-update.component";
+import { UserUpdateComponent } from './user/user-update/user-update.component';
+import { RoleGuard } from './core/guards/role.guard';
+import { Role } from './core/model/role';
 
 const routes: Routes = [
   {
@@ -18,11 +18,11 @@ const routes: Routes = [
   },
   {
     path: 'products',
-    // canActivateChild: [UserRoleGuard],
+    canActivateChild: [RoleGuard],
     children: [
-      { path: 'list', component: ProductListComponent },
-      { path: 'create', component: ProductCreateComponent },
-      { path: 'update/:id', component: ProductUpdateComponent }
+      { path: 'list', component: ProductListComponent, data: { roles: [Role.USER, Role.ADMIN] } },
+      { path: 'create', component: ProductCreateComponent, data: { roles: [Role.ADMIN] } },
+      { path: 'update/:id', component: ProductUpdateComponent, data: { roles: [Role.ADMIN] } }
     ]
   },
   {
@@ -31,7 +31,9 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    canActivateChild: [AdminRoleGuard],
+    canActivateChild: [RoleGuard],
+    // inherited by the children (componentless parent)
+    data: { roles: [Role.ADMIN] },
     children: [
       {
         path: 'create',

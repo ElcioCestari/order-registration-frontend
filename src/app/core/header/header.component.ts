@@ -1,5 +1,6 @@
-import {Component, HostListener} from '@angular/core';
-import {UserService} from '../../user/service/user.service';
+import { Component } from '@angular/core';
+import { UserService } from '../../user/service/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,21 +8,15 @@ import {UserService} from '../../user/service/user.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  isLogged: boolean;
+  readonly isLoggedIn$ = this.auth.isLoggedIn$;
+  readonly isAdmin$ = this.auth.isAdmin$;
 
-  constructor(private readonly userService: UserService) {
-    this.isLogged = !!sessionStorage.getItem('authorities');
-  }
+  constructor(
+    private readonly userService: UserService,
+    private readonly auth: AuthService
+  ) {}
 
   logout() {
     this.userService.logout();
-    this.isLogged = false;
-  }
-
-  @HostListener('window:storage', ['$event'])
-  onStorageChange(event: StorageEvent) {
-    if (event.storageArea === sessionStorage && event.key === 'authorities') {
-      this.isLogged = event.newValue === 'true';
-    }
   }
 }

@@ -4,7 +4,6 @@ import { Category } from '../../../core/model/category';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { SnackbarService } from '../../../core/services/snackbar.service';
-import { CategoryService } from '../../../core/services/category.service';
 import { take } from 'rxjs';
 
 @Component({
@@ -13,25 +12,22 @@ import { take } from 'rxjs';
   styleUrls: ['./product-update.component.css']
 })
 export class ProductUpdateComponent implements OnInit {
-  categories: string[] = this.categoryService.getValues();
+  readonly categories: string[] = Object.values(Category);
   product: Product = {
     name: '',
     haveInStock: false,
-    registrationTime: new Date(),
     category: Category.NOT_DEFINED,
     stock: { quantity: 0 },
     description: '',
     unitPurchaseSale: 0,
     unitPurchasePrice: 0
   };
-  selectedCategory: Category = Category.NOT_DEFINED;
 
   constructor(
     private readonly router: Router,
     private readonly service: ProductService,
     private readonly snackBar: SnackbarService,
-    private readonly activeRoute: ActivatedRoute,
-    private readonly categoryService: CategoryService
+    private readonly activeRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -40,8 +36,9 @@ export class ProductUpdateComponent implements OnInit {
       .readById(id!)
       .pipe(take(1))
       .subscribe({
-        next: produt => (this.product = produt),
-        error: () => this.snackBar.show(`Produto com id ${id} não encontrado`)
+        // the category select is bound to product.category, so it shows the saved value
+        next: product => (this.product = product),
+        error: err => this.snackBar.showError(`Produto com id ${id} não encontrado`, err)
       });
   }
 
@@ -52,9 +49,6 @@ export class ProductUpdateComponent implements OnInit {
   }
 
   update(): void {
-    this.product.category = this.categoryService.getByValue(
-      this.selectedCategory
-    );
     this.service
       .update(this.product)
       .pipe(take(1))
@@ -63,7 +57,7 @@ export class ProductUpdateComponent implements OnInit {
           this.snackBar.show('Produto salvo!');
           this.router.navigate(['/products/list']);
         },
-        error: () => this.snackBar.show('Erro ao atualizar produto')
+        error: err => this.snackBar.showError('Erro ao atualizar produto', err)
       });
   }
 }

@@ -24,7 +24,7 @@ export class QuantityPatchComponent {
   ngOnInit(): void {}
 
   cancel() {
-    this.dialogRef.close(Choice.OK);
+    this.dialogRef.close(Choice.CANCEL);
   }
 
   update() {
@@ -38,7 +38,7 @@ export class QuantityPatchComponent {
         },
         error: err => {
           console.error(err);
-          this.snackBar.show('Algo deu errado!', false);
+          this.snackBar.showError('Algo deu errado!', err);
         }
       });
   }

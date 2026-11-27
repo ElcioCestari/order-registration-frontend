@@ -1,4 +1,4 @@
-<form #productForm="ngForm">
+<form #productForm="ngForm" (ngSubmit)="update()">
   <div class="container">
     <div class="input-fields">
       <mat-form-field>
@@ -11,20 +11,20 @@
           min="0"
           placeholder="1"
           required
-          #purchaseSale="ngModel"
+          #quantity="ngModel"
         />
-        <mat-error *ngIf="purchaseSale.invalid">valor invalido</mat-error>
+        <mat-error *ngIf="quantity.invalid">valor inválido</mat-error>
       </mat-form-field>
     </div>
     <div class="actions">
-      <button mat-raised-button (click)="cancel()">cancel</button>
+      <button type="button" mat-raised-button (click)="cancel()">cancelar</button>
       <button
+        type="submit"
         mat-raised-button
         [disabled]="productForm.invalid"
-        (click)="update()"
         color="primary"
       >
-        save
+        salvar
       </button>
     </div>
   </div>

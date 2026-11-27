@@ -1,23 +1,33 @@
 <mat-card>
   <mat-card-title>Editar Usuário</mat-card-title>
   <mat-card-content>
-    <form #userForm="ngForm">
+    <form #userForm="ngForm" (ngSubmit)="save()">
       <mat-form-field>
-        <mat-label>Password</mat-label>
+        <mat-label>Usuário</mat-label>
+        <input matInput [value]="username" disabled />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Papéis</mat-label>
+        <mat-select [(ngModel)]="user.authorities" name="authorities" multiple required #authorities="ngModel">
+          <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="authorities.invalid">selecione ao menos um papel</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Nova senha</mat-label>
         <input
           [(ngModel)]="user.password"
           name="password"
-          #password="ngModel"
           matInput
           type="password"
-          required
-          placeholder="Password"
+          autocomplete="new-password"
+          placeholder="Nova senha"
         />
-        <mat-error *ngIf="password.invalid">valor inválido</mat-error>
+        <mat-hint>deixe em branco para manter a senha atual</mat-hint>
       </mat-form-field>
       <mat-card-actions>
-        <button mat-raised-button (click)="cancel()">cancel</button>
-        <button mat-raised-button [disabled]="userForm.invalid" (click)="save()">
+        <button type="button" mat-raised-button (click)="cancel()">cancelar</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="userForm.invalid">
           salvar
         </button>
       </mat-card-actions>

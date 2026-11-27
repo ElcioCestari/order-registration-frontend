@@ -1,5 +1,5 @@
 <mat-card class="mat-elevation-z4">
-  <form #productForm="ngForm">
+  <form #productForm="ngForm" (ngSubmit)="update()">
     <mat-card-content>
       <mat-form-field>
         <mat-label>Nome</mat-label>
@@ -15,7 +15,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Categoria</mat-label>
-        <mat-select [(ngModel)]="selectedCategory" name="category">
+        <mat-select [(ngModel)]="product.category" name="category" required>
           <mat-option *ngFor="let category of categories" [value]="category">{{
             category
           }}</mat-option>
@@ -28,6 +28,8 @@
           [(ngModel)]="product.unitPurchasePrice"
           name="unitPurchasePrice"
           type="number"
+          min="0"
+          step="0.01"
           placeholder="R$0,00"
           #purchasePrice="ngModel"
           required
@@ -41,6 +43,8 @@
           [(ngModel)]="product.unitPurchaseSale"
           name="unitPurchaseSale"
           type="number"
+          min="0"
+          step="0.01"
           placeholder="0,00"
           required
           #purchaseSale="ngModel"
@@ -61,20 +65,20 @@
           min="0"
           placeholder="1"
           required
-          #purchaseSale="ngModel"
+          #quantity="ngModel"
         />
-        <mat-error *ngIf="purchaseSale.invalid">valor invalido</mat-error>
+        <mat-error *ngIf="quantity.invalid">valor inválido</mat-error>
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button (click)="cancel()">cancel</button>
+      <button type="button" mat-raised-button (click)="cancel()">cancelar</button>
       <button
+        type="submit"
         mat-raised-button
         [disabled]="productForm.invalid"
-        (click)="update()"
         color="primary"
       >
-        save
+        salvar
       </button>
     </mat-card-actions>
   </form>

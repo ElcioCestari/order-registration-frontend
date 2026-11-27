@@ -30,11 +30,12 @@ export class UserCreateComponent implements OnInit {
       .subscribe({
         next: () => {
           this.snackBar.show('usuário salvo!');
-          this.router.navigate(['/product/list']);
+          this.router.navigate(['/user/list']);
         },
         error: err => {
-          console.log(err);
-          this.snackBar.show('algo deu errado');
+          console.error(err);
+          // 409: the API rejects duplicate usernames
+          this.snackBar.showError(err.status === 409 ? 'esse usuário já existe' : 'algo deu errado', err);
         }
       });
   }

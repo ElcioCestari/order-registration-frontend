@@ -3,6 +3,7 @@ import { Product } from '../../core/model/product';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { Page } from '../../core/model/page';
 
 @Injectable({
   providedIn: 'root'
@@ -12,25 +13,16 @@ export class ProductService {
   constructor(private readonly http: HttpClient) {}
 
   save(product: Product): Observable<Product> {
-    return this.http.post<Product>(`${this.baseUrl}`, product).pipe(p => p);
+    return this.http.post<Product>(`${this.baseUrl}`, product);
   }
 
-  read(size: number, page: number): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.baseUrl}/all`);
+  /** @param page zero-based, as the API expects */
+  read(size: number, page: number): Observable<Page<Product>> {
+    return this.http.get<Page<Product>>(this.baseUrl, { params: { size, page } });
   }
-
-  // todo - try to fix pagination
-  // read(size: number, page: number): Observable<Page> {
-  //   const headers = new HttpHeaders({
-  //     Authorization: sessionStorage.getItem('auth')!
-  //   });
-  //   return this.http.get<Page>(`${this.baseUrl}?size=${size}&page=${page}`, {headers});
-  // }
 
   update(product: Product): Observable<Product> {
-    return this.http
-      .put<Product>(`${this.baseUrl}/${product.id}`, product)
-      .pipe(p => p);
+    return this.http.put<Product>(`${this.baseUrl}/${product.id}`, product);
   }
 
   readById(id: string): Observable<Product> {
@@ -41,7 +33,6 @@ export class ProductService {
     return this.http.delete<any>(`${this.baseUrl}/${id}`);
   }
 
-  //TODO -define return type
   patch(id: string, product: Product): Observable<Product> {
     return this.http.patch<Product>(`${this.baseUrl}/${id}`, product);
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Product } from '../../../core/model/product';
 import { Category } from '../../../core/model/category';
 import { Router } from '@angular/router';
@@ -11,7 +11,8 @@ import { take } from 'rxjs';
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.css']
 })
-export class ProductCreateComponent implements OnInit {
+export class ProductCreateComponent {
+  readonly categories: string[] = Object.values(Category);
   product: Product = {
     name: '',
     description: '',
@@ -19,7 +20,6 @@ export class ProductCreateComponent implements OnInit {
     unitPurchaseSale: 0,
     category: Category.NOT_DEFINED,
     stock: { quantity: 0 },
-    registrationTime: new Date(1970, 12, 31),
     haveInStock: false
   };
 
@@ -28,8 +28,6 @@ export class ProductCreateComponent implements OnInit {
     private readonly service: ProductService,
     private readonly snackBar: SnackbarService
   ) {}
-
-  ngOnInit(): void {}
 
   cancel(): void {
     this.snackBar.show(`Operação cancelada`);
@@ -45,7 +43,7 @@ export class ProductCreateComponent implements OnInit {
           this.snackBar.show(`Produto salvo!`);
           this.router.navigate(['/products/list']);
         },
-        error: () => this.snackBar.show(`Algo deu errado!`)
+        error: err => this.snackBar.showError(`Algo deu errado!`, err)
       });
   }
 }

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserSystem } from '../../../core/model/user-system';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
 import { take } from 'rxjs';
@@ -9,6 +9,7 @@ import { SnackbarService } from '../../../core/services/snackbar.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../core/components/confirm-dialog/confirm-dialog.component';
 import { Choice } from '../../../core/model/choice';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-user-list',
@@ -25,11 +26,15 @@ export class UserListComponent implements OnInit, AfterViewInit {
     private readonly router: Router,
     private readonly service: UserService,
     private readonly snackBar: SnackbarService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly responsive: BreakpointObserver
   ) {}
 
   ngOnInit(): void {
     this.load();
+    this.responsive.observe(Breakpoints.HandsetPortrait).subscribe(result => {
+      this.isMobile = result.matches;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -51,29 +56,24 @@ export class UserListComponent implements OnInit, AfterViewInit {
     this.router.navigate([`/user/update/${userSystem.id}`]);
   }
 
-  newProduct() {
+  newUser() {
     this.router.navigate(['/user/create']);
   }
-
-  pageNavigations($event: PageEvent) {}
 
   private load(): void {
     this.service
       .read()
       .pipe(take(1))
-      .subscribe(list => (this.list.data = list));
+      .subscribe({
+        next: list => (this.list.data = list),
+        error: err => this.snackBar.showError('Não foi possível carregar os usuários', err)
+      });
   }
 
   openDialog(userSystem: UserSystem): MatDialogRef<any> {
     return this.dialog.open(ConfirmDialogComponent, {
       width: '450px',
-      data: {
-        title: 'deletar',
-        value: `${userSystem.username}?`,
-        action: () => {
-          console.log('ta indo');
-        }
-      }
+      data: { title: 'deletar', value: `${userSystem.username}?` }
     });
   }
 
@@ -88,7 +88,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
         },
         error: err => {
           console.error(err);
-          this.snackBar.show('algo deu errado', false);
+          this.snackBar.showError('algo deu errado', err);
         }
       });
   }

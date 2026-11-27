@@ -1,7 +1,7 @@
 <mat-card class="mat-elevation-z7 center">
   <mat-card-title>login</mat-card-title>
   <mat-card-content>
-    <form #loginForm="ngForm">
+    <form #loginForm="ngForm" (ngSubmit)="login()">
       <mat-form-field>
         <mat-label>Username</mat-label>
         <input
@@ -28,12 +28,12 @@
         <mat-error *ngIf="password.invalid">campo inválido</mat-error>
       </mat-form-field>
       <mat-card-actions>
-        <button mat-raised-button routerLink="/">cancelar</button>
+        <button type="button" mat-raised-button routerLink="/">cancelar</button>
         <button
+          type="submit"
           mat-raised-button
           [disabled]="loginForm.invalid"
           color="primary"
-          (click)="login()"
         >
           logar
         </button>

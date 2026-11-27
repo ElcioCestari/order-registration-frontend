@@ -1,26 +1,12 @@
-export interface Page {
-  content: any[];
-  pageable: Pageable;
-  last: boolean;
+/** Page returned by the API's paged endpoints (Spring Data Page). */
+export interface Page<T> {
+  content: T[];
   totalElements: number;
   totalPages: number;
-  size: number;
+  /** zero-based page index */
   number: number;
-  sort: Sort;
+  size: number;
   first: boolean;
+  last: boolean;
   empty: boolean;
-}
-export interface Pageable {
-  pageNumber: number;
-  pageSize: number;
-}
-export interface Stock {
-  id: any;
-  quantity: number;
-}
-
-export interface Sort {
-  empty: boolean;
-  sorted: boolean;
-  unsorted: boolean;
 }

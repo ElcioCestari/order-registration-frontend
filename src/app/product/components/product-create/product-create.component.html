@@ -1,7 +1,8 @@
 <mat-card class="mat-elevation-z7">
   <mat-card-title>Crie um novo Produto</mat-card-title>
   <mat-card-content>
-    <form #productForm="ngForm">
+    <!-- Enter submits the form; "cancelar" is type="button" so it is never the default action -->
+    <form #productForm="ngForm" (ngSubmit)="save()">
       <mat-form-field>
         <mat-label>Nome</mat-label>
         <input
@@ -24,38 +25,67 @@
           placeholder="Digite a descrição do produto"
           required
         ></textarea>
-        <mat-error *ngIf="description.invalid"></mat-error>
+        <mat-error *ngIf="description.invalid">campo obrigatório</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Categoria</mat-label>
+        <mat-select [(ngModel)]="product.category" name="category" required>
+          <mat-option *ngFor="let category of categories" [value]="category">{{
+            category
+          }}</mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Preço de compra</mat-label>
         <input
           matInput
+          type="number"
+          min="0"
+          step="0.01"
           [(ngModel)]="product.unitPurchasePrice"
           name="unitPurchasePrice"
           #unitPurchasePrice="ngModel"
           placeholder="Preço de compra R$"
+          required
         />
-        <mat-error *ngIf="unitPurchasePrice.invalid">campo invalido</mat-error>
+        <mat-error *ngIf="unitPurchasePrice.invalid">valor inválido</mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Preço de venda</mat-label>
         <input
           matInput
+          type="number"
+          min="0"
+          step="0.01"
           [(ngModel)]="product.unitPurchaseSale"
           placeholder="Preço de venda R$"
           name="unitPurchaseSale"
           #unitPurchaseSale="ngModel"
           required
         />
-        <mat-error *ngIf="unitPurchaseSale.invalid">campo invalido</mat-error>
+        <mat-error *ngIf="unitPurchaseSale.invalid">valor inválido</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Quantidade</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          step="1"
+          [(ngModel)]="product.stock.quantity"
+          name="quantity"
+          #quantity="ngModel"
+          required
+        />
+        <mat-error *ngIf="quantity.invalid">valor inválido</mat-error>
       </mat-form-field>
       <mat-card-actions>
-        <button mat-raised-button (click)="cancel()">cancelar</button>
+        <button type="button" mat-raised-button (click)="cancel()">cancelar</button>
         <button
+          type="submit"
           mat-raised-button
           color="primary"
           [disabled]="productForm.invalid"
-          (click)="save()"
         >
           salvar
         </button>
