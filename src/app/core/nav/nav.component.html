@@ -12,7 +12,7 @@
       <a mat-list-item routerLink="/products/list">
         <em class="material-icons">storefront</em>Loja
       </a>
-      <a mat-list-item routerLink="/user/list">
+      <a *ngIf="isAdmin$ | async" mat-list-item routerLink="/user/list">
         <em class="material-icons">account_circle</em>Usuário
       </a>
     </mat-nav-list>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,7 +10,12 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 export class NavComponent implements OnInit {
   isMobileSize = false;
   phone: string | undefined = undefined;
-  constructor(private readonly responsive: BreakpointObserver) {}
+  readonly isAdmin$ = this.auth.isAdmin$;
+
+  constructor(
+    private readonly responsive: BreakpointObserver,
+    private readonly auth: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.responsive.observe(Breakpoints.HandsetPortrait).subscribe(result => {

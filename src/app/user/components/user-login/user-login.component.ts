@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { UserSystem } from '../../../core/model/user-system';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
 
 @Component({
@@ -19,6 +19,7 @@ export class UserLoginComponent implements OnInit {
   constructor(
     private readonly service: UserService,
     private readonly router: Router,
+    private readonly route: ActivatedRoute,
     private readonly snackBar: SnackbarService
   ) {}
 
@@ -31,11 +32,13 @@ export class UserLoginComponent implements OnInit {
       .subscribe({
         next: () => {
           this.snackBar.show('sucesso!');
-          this.router.navigate(['/']);
+          // back to the page that required the login, if any
+          const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+          this.router.navigateByUrl(returnUrl || '/');
         },
         error: (err) => {
-          console.error(err)
-          this.snackBar.show('algo deu errado.', false);
+          console.error(err);
+          this.snackBar.show(err.status === 401 ? 'usuário ou senha inválidos' : 'algo deu errado.', false);
         }
       });
   }

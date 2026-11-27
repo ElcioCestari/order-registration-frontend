@@ -9,6 +9,6 @@ export interface Product {
   unitPurchaseSale: number;
   category: Category;
   stock: Stock;
-  registrationTime: Date;
+  registrationTime?: Date;
   haveInStock?: boolean;
 }

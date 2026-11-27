@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { UserSystemUpdateDto } from '../user-update/user-system-update.dto';
 import { Router } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class UserService {
 
   constructor(
     private readonly http: HttpClient,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly auth: AuthService
   ) {}
 
   login(user: UserSystem): Observable<UserSystem> {
@@ -26,18 +28,18 @@ export class UserService {
       .post<UserSystem>(`${this.baseUrl}/login`, user, { headers: headers })
       .pipe(
         map(result => {
-          sessionStorage.setItem('username', result.username);
-          sessionStorage.setItem('authorities', result.authorities.join(','));
-          sessionStorage.setItem('auth', basicAuth);
+          this.auth.start({
+            username: result.username,
+            authorities: result.authorities,
+            authHeader: basicAuth
+          });
           return result;
         })
       );
   }
 
   logout() {
-    sessionStorage.removeItem('username');
-    sessionStorage.removeItem('authorities');
-    sessionStorage.removeItem('auth');
+    this.auth.end();
     this.router.navigate(['/']);
   }
 
@@ -57,7 +59,7 @@ export class UserService {
     return this.http.put<any>(`${this.baseUrl}/${userSystem.id}`, userSystem);
   }
 
-  readByUsername(username: string): Observable<UserSystem> {
-    return this.http.get<UserSystem>(`${this.baseUrl}/${username}`);
+  readById(id: string): Observable<UserSystem> {
+    return this.http.get<UserSystem>(`${this.baseUrl}/${id}`);
   }
 }
